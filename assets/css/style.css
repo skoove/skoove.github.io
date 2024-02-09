@@ -1,11 +1,21 @@
 @import "{{ site.theme }}";
-
+html {
+  background: linear-gradient(to left,#866994, #9b57d3);
+}
 body {
-  background-color: rgb(255, 131, 224);
+  width: 600px;
+  margin: 0 auto;
+  background-color: #a371b3;
+  padding: 0 20px 20px 20px;
+  border: 5px solid rgb(60, 4, 124);
 }
 h1 {
-  color: rgb(124, 124, 124);
+  text-align: center;
+  color: rgb(255, 171, 60);
+  text-shadow:3px 3px 0px  rgb(143, 96, 35);
 }
+
+li,
 p {
-  color: rgb(59, 59, 59);
+  color: rgb(27, 0, 25);
 }
