@@ -3,5 +3,11 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: default
+title: skoove's site
 ---
-under construction!
+# hi! im skoove
+under construction !
+
+- [about](about.md)
+
+![what a silly car](https://media1.tenor.com/m/vAjlcgnOYgoAAAAd/cat-kitty.gif)
