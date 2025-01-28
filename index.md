@@ -7,7 +7,6 @@ title: skoove's site
 ---
 # hi! im skoove
 under construction !
-test
 
 - [about](about.md)
 
