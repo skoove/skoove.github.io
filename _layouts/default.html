@@ -10,15 +10,18 @@
 <body>
 
   <div class="header">
+    {% include top-bar.html %}
   </div>
   <div class="container">
     <div class="sidebar">
+      {% include navigation.html %}
     </div>   
     <div class="main">
       {{ content }}
     </div>
   </div>
   <div class="footer">
+    {% include footer.html %}
   </div>
   
   
