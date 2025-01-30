@@ -4,12 +4,12 @@
 - name: about me
   link: /about/
 
-- name: blog
-  link: /blog/
+# - name: blog
+#   link: /blog/
 
-- name: my work
-  link: /my_work/
+# - name: my work
+#   link: /my_work/
 
-- name: portfolio
-  link: /portfolio/
+# - name: portfolio
+#   link: /portfolio/
   
