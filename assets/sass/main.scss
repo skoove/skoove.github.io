@@ -69,16 +69,103 @@ div.main {
 a:link,
 a:visited {
   color: $blue;
+  text-decoration: none;
 }
 
 a:hover {
   color: $green;
+  transition: color 500ms;
+}
+
+.sidebar {
+}
+
+a.button,
+.top-bar-link,
+.button {
+  color: $text;
+  border: 2px solid;
+  border-color: $lavender;
+  background-color: $base;
+  border-radius: 10px;
+  margin: 10px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  display: block;
+}
+
+a.button:hover,
+.button:hover,
+a.current-page,
+.current-page,
+.top-bar-link:hover {
+  background-color: $surface0;
+  border-color: $green;
+  color: $green;
+  transition:
+    color 500ms,
+    background-color 500ms,
+    border-color 500ms
+  ;
+}
+
+.header {
+  overflow: hidden;
+}
+
+#top-bar-container {
+display: flex;
+flex-direction: row;
+margin: auto;
+height: 50px;
+position: abosloute;
+top: 50%
+}
+
+#name {
+  font-size: 40px;
+  line-height: 40px;
+  color: $lavender;
+  margin: auto 0px auto 10px;
+}
+
+#pronouns {
+  margin-top: 3px;
+  font-size: 15px;
+  color: $lavender;
+  margin-left: 5px;
+}
+
+#top-bar-links {
+  margin: auto;
+}
+
+.top-bar-link {
+  display: inline;
+  padding: 3px;
+}
+
+#footer-text {
+  text-align: center;
 }
 
 p,
 ul,
-li {
+li,
+.button {
   color: $text;
+}
+
+img {
+  margin-left: 20px;
+  margin-right: auto;
+  text-align: center;
+  display:block;
+  width: 50%;
+  border-radius: 10px;
 }
 
 h1 {
