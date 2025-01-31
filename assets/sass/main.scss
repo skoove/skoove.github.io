@@ -69,7 +69,6 @@ div.main {
 a:link,
 a:visited {
   color: $blue;
-  text-decoration: none;
 }
 
 a:hover {
@@ -95,6 +94,7 @@ a.button,
   font-weight: bold;
   font-size: 20px;
   display: block;
+  text-decoration: none;
 }
 
 a.button:hover,
@@ -130,6 +130,7 @@ top: 50%
   line-height: 40px;
   color: $lavender;
   margin: auto 0px auto 10px;
+  text-decoration: none;
 }
 
 #pronouns {
@@ -143,8 +144,9 @@ top: 50%
   margin: auto;
 }
 
-.top-bar-link {
+a.top-bar-link {
   display: inline;
+  color: $lavender;
   padding: 3px;
 }
 
@@ -157,6 +159,18 @@ ul,
 li,
 .button {
   color: $text;
+}
+
+em {
+  color: $green;
+}
+
+hr {
+  color: $lavender;
+}
+
+h2.blog-home-post-title {
+  margin-bottom: 3px;
 }
 
 img {

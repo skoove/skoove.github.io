@@ -1,6 +1,6 @@
 ---
 layout: default
-title: skoove's site | about me
+title: about me
 permalink: /about/
 ---
 # about me
