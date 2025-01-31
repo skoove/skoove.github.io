@@ -4,8 +4,8 @@
 - name: about me
   link: /about/
 
-# - name: blog
-#   link: /blog/
+- name: blog
+  link: /blog/
 
 - name: my work
   link: /my work/
