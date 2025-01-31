@@ -7,8 +7,8 @@
 # - name: blog
 #   link: /blog/
 
-# - name: my work
-#   link: /my_work/
+- name: my work
+  link: /my work/
 
 # - name: portfolio
 #   link: /portfolio/

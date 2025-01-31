@@ -173,16 +173,12 @@ h2.blog-home-post-title {
   margin-bottom: 3px;
 }
 
-img {
-  margin-left: 20px;
-  margin-right: auto;
-  text-align: center;
-  display:block;
-  width: 50%;
+img,
+video {
+  width: 75%;
   border-radius: 10px;
 }
 
-h1 {
+h1, h2 {
   color: $lavender;
-  font-family: $main_font;
 }
