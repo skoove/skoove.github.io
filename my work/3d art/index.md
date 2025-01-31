@@ -6,7 +6,7 @@ all made in blender!
 
 ---
 ## doughnut
-<video width="70%" height="70%" autoplay loop>  
+<video autoplay loop>  
   <source src="/assets/my work/3d art/doughnut.mp4" type="video/mp4">  
 </video>
 [blog post](</blog/3d art/2025/01/31/how-i-made-the-psx-style-doughnut>)
