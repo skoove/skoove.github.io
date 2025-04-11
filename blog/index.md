@@ -1,12 +1,13 @@
 ---
 layout: default
-title: blog
 ---
-# my blog
-this is where i put all my things! everything is sorted by category
-
----
-
-- [all posts](</blog/all posts>)
-<!--- - [programming](</blog/programming/>) --->
-- [3d art](</blog/3d art/>)
+<h1> blog </h1>
+<hr>
+{% for post in site.posts %}
+  <div>
+    <h2 style="margin-bottom: 3px;"><a href="{{ post.url }}">{{ post.title | downcase }}</a></h2>
+    <em>{{ post.date | date: "%Y-%m-%d" }} UTC</em>
+    <p> {{ post.excerpt }}
+    <hr>
+  </div>
+{% endfor %}
