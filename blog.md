@@ -2,6 +2,7 @@
 layout: default
 ---
 <h1> blog </h1>
+[subscribe on rss!](/feed.xml)
 <hr>
 {% for post in site.posts %}
   <div>
