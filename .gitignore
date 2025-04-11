@@ -6,3 +6,5 @@ vendor
 Gemfile.lock
 mprocs.log
 .obsidian
+.direnv
+
