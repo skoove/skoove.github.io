@@ -10,5 +10,4 @@ layout: default
     <em>{{ post.date | date: "%Y-%m-%d" }} UTC</em>
     <p> {{ post.excerpt }}
     <hr>
-  </div>
 {% endfor %}
