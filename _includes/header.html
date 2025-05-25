@@ -1,0 +1,15 @@
+<header>
+  <div class="site-header">
+    <div class="name"><a href="/" id="name">skoove</a></div>
+    <nav>
+      {% for item in site.data.navigation %}
+      <a href="{{ item.link }}" class="button {% if page.url == item.link %}current-page{% endif %}">
+        <div>
+          {{ item.name }}
+        </div>
+      </a>
+      {% endfor %}
+    </nav>
+  </div>
+  <hr>
+</header>

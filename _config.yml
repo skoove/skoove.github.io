@@ -28,9 +28,10 @@ sass:
   sass_dir: assets/sass
 
 # Build settings
-theme: minima
+# theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-sass-converter
 
 highlighter: rouge
 

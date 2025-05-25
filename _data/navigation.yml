@@ -1,14 +1,14 @@
-- name: home
-  link: /
-
-- name: about me
-  link: /about/
+# - name: home
+#   link: /
 
 - name: blog
   link: /blog
 
 - name: my work
   link: /my work/
+
+- name: about me
+  link: /about/
 
 # - name: portfolio
 #   link: /portfolio/

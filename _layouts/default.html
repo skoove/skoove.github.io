@@ -4,39 +4,33 @@
 <head>
   <meta charset="utf-8">
   <title>skoove's site | {{ page.title | downcase }}</title>
-  <link rel="stylesheet" href="/assets/sass/main.css">
+  <link rel="stylesheet" href="{{ '/assets/sass/main.css' | relative_url }}">
 
   <!-- mathjax thigs -->
   <script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['$$', '$$']]
+      }
+    };
   </script>
   <script type="text/javascript" id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+    </script>
 </head>
 
 <body>
-
-  <div class="header">
-    {% include top-bar.html %}
-  </div>
-  <div class="container">
-    <div class="sidebar">
-      {% include navigation.html %}
-    </div>   
+  <div class="content">
+    <div class="header">
+      {% include header.html %}
+    </div>
     <div class="main">
       {{ content }}
     </div>
+    <div class="footer">
+      {% include footer.html %}
+    </div>
   </div>
-  <div class="footer">
-    {% include footer.html %}
-  </div>
-  
-  
 </body>
 
 </html>

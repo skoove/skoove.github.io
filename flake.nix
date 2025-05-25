@@ -18,6 +18,8 @@
             bundler
             jekyll
             nodejs # Sometimes needed for Jekyll plugins
+
+            vscode-langservers-extracted
             
             # Common dependencies
             gcc

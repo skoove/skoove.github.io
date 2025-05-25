@@ -3,7 +3,7 @@ layout: blog-post
 ---
 Photorealism is very hard, and the cycles renderer is very very intensive, especially on my GTX 960. So I decided to try something different and attempt a PSX style object.
 
-<video autoplay loop>  
+<video autoplay loop style="width: 100%">  
   <source src="/assets/my work/3d art/doughnut.mp4" type="video/mp4">  
 </video>
 

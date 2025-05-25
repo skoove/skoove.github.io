@@ -2,9 +2,8 @@
 layout: default
 ---
 # 3d art
-all made in blender!
+all made in [blender!](https://www.blender.org/)
 
----
 ## doughnut
 <video autoplay loop>  
   <source src="/assets/my work/3d art/doughnut.mp4" type="video/mp4">  
@@ -13,7 +12,6 @@ all made in blender!
 
 Doughnut with vertex snapping and stuff, wanted to try something that was not photorealism, but also learn to use eevee so that I can do photorealism with it in the future.
 
----
 ## mug
 ![mug](/assets/my%20work/3d%20art/mug.png)
 
