@@ -16,3 +16,4 @@ i like to do a lot of things, but im not very good at most of them.
 
 ## freinds sites
 - axlefublr: [axlefublr.github.io](https://axlefublr.github.io/)
+- cinderowo: [cinderowo.github.io](https://cinderowo.github.io/)
