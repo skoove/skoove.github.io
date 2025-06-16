@@ -15,4 +15,4 @@ i like to do a lot of things, but im not very good at most of them.
 - [undersea](https://github.com/skoove/undersea)
 
 ## freinds sites
-- axlefublr: [https://axlefublr.github.io/](axlefublr.github.io)
+- axlefublr: [axlefublr.github.io](https://axlefublr.github.io/)
