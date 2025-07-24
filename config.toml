@@ -1,6 +1,8 @@
 base_url = "https://skoove.dev"
 compile_sass = true
 build_search_index = false
+generate_feeds = true
+
 [markdown]
 highlight_code = true
 
