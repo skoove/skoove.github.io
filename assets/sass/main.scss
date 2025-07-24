@@ -10,7 +10,7 @@ $fg: #ebdbb2;
 
 $red: #cc241d;
 $green: #98971a;
-$yellow: #d799921;
+$yellow: #d79921;
 $blue: #458588;
 $purple: #b16286;
 $aqua: #689d6a;
@@ -19,6 +19,7 @@ body {
   background-color: $bg0;
   color: $fg;
   font-family: 'Rubik', sans-serif;
+  line-height: 1.5em;
 }
 
 .content {
@@ -30,6 +31,11 @@ body {
   font-size: 12pt;
   border-radius: 20pt
 }
+
+h1 { color: $green; }
+h2 { color: $yellow; }
+h3 { color: $blue; }
+h4 { color: $purple; }
 
 hr {
   color: $green;
@@ -46,6 +52,10 @@ a:visited {
   color: $purple
 }
 
+a.footnote {
+  text-decoration: none;
+}
+
 img {
   width: 100%;
 }
@@ -57,6 +67,14 @@ img {
 
 video {
   width: 100%
+}
+
+strong {
+  color: $yellow;
+}
+
+em {
+  color: $aqua;
 }
 
 h1 {
@@ -94,4 +112,20 @@ nav a.button {
   color: $blue;
   text-decoration: none;
   font-weight: bold
+}
+
+/* code block thingy */
+.highlight {
+  padding: 3pt;
+  border-radius: 10pt;
+}
+
+code {
+  background: $bg0;
+  border-radius: 5pt;
+}
+
+[role="doc-endnote"]::marker {
+  color: $yellow;
+  font-weight: bold;
 }
