@@ -1,7 +1,7 @@
 +++
 template = "page.html"
+title = "about me"
 +++
-# about me
 hi! im skoove!
 
 I am a 17 year old living in Australia, I enjoy programming and 3d art, but I'm not particularly good either. I also love radio and aviation!

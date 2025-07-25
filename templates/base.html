@@ -3,10 +3,32 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="/style.css">
+  {% if page and page.title %}
+  <title>skoove.dev - {{ page.title }}</title>
+  {% elif section and section.title %}
+  <title>skoove.dev - {{ section.title }}</title>
+  {% else %}
   <title>skoove.dev</title>
+  {% endif %}
 </head>
 
 <body>
+  <header>
+    <a href="/">
+      <h1 class="site_name">skoove.dev</h1>
+    </a>
+
+    <nav>
+      {% for item in config.extra.nav %}
+      <li><a href="{{ item.path }}">
+          <h1 class="nav_button">{{ item.name }}</h1>
+        </a></li>
+      {% endfor %}
+    </nav>
+  </header>
+  <hr>
+
   <section class="section">
     <div class="container">
       {% block content %} {% endblock content %}
