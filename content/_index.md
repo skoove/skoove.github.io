@@ -13,3 +13,10 @@ i like to do a lot of things, but im not very good at most of them.
 - axlefublr: [axlefublr.github.io](https://axlefublr.github.io/)
 - cinderowo: [cinderowo.github.io](https://cinderowo.github.io/)
 
+---
+
+<div class="webring" style="text-align: center; font-weight: bold">
+  <a href="https://shring.ficd.sh/skoove/previous">&lt last</a> |
+  <a href="https://shring.ficd.sh">shring</a> |
+  <a href="https://shring.ficd.sh/skoove/next">next &gt</a>
+</div>
