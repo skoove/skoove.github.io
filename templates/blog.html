@@ -4,6 +4,7 @@
 <h1 class="title">
   {{ section.title }}
 </h1>
+<p class="rss-feed"><a href="/rss.xml">rss feed</a></p>
 <ul>
   {% for page in section.pages %}
   <li><a href="{{ page.permalink | safe }}">{{ page.title }} ({{ page.date }})</li>
