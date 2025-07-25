@@ -1,5 +1,5 @@
 {
-  description = "Jekyll development environment";
+  description = "website devshell and stuff";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -14,18 +14,8 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            ruby
-            bundler
-            jekyll
-            nodejs # Sometimes needed for Jekyll plugins
-
             vscode-langservers-extracted
-            
-            # Common dependencies
-            gcc
-            gnumake
-            libffi
-            zlib
+            zola
           ];
         };
       });

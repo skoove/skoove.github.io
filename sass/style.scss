@@ -1,0 +1,154 @@
+@import "./base16/gruvbox-dark-medium.scss";
+
+body {
+  background-color: $base01;
+}
+
+* {
+  color: $base05;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.5em;
+}
+
+header {
+  display: flex;
+}
+
+header a, header a:hover{
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  margin-left: auto;
+}
+
+nav li {
+  align-self: center;
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+nav a.previous-page {
+  margin-left: auto;
+}
+
+nav a.next-page {
+  margin-right: auto;
+}
+
+nav.page-nav {
+  margin: none;
+}
+
+h1.site_name, h1.nav_button {
+  margin: 7px 0px 0px 0px;
+  color: $base0E;
+  transition: color 0.2s ease;
+}
+
+h1.site_name:hover, h1.nav_button:hover {
+  color: $base0D;
+}
+
+body {
+  max-width: 600px;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 10px 0px 10px 0px;
+  color: $base06;
+}
+
+a.zola-anchor {
+  margin-right: 0em;
+  position: relative;
+  right: 1em;
+  color: $base06;
+  text-decoration: none;
+}
+
+a.zola-anchor:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a.zola-anchor::before {
+  content: "# ";
+  position: relative;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+a.zola-anchor:hover::before {
+  content: "# ";
+  position: relative;
+  color: $base06;
+}
+
+ul, ol, {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 20px
+}
+
+ul li::marker {
+  content: "- ";
+}
+
+a {
+  color: $base0D;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $base0E;
+  text-decoration: underline;
+}
+
+pre {
+  padding: 1rem;
+  border-radius: 20px;
+}
+
+code {
+  background-color: $base00;
+  border-radius: 05px;
+  padding: 0.2em 0.5em;
+}
+
+/* Container: space out footnotes a bit */
+.footnote-definition {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+  color: $base05;
+}
+
+/* Superscript number */
+.footnote-definition-label {
+  font-size: 0.75rem;
+  vertical-align: super;
+  color: $base08;
+}
+
+/* Optional: turn number into a back link */
+.footnote-definition-label::after {
+  content: ".";
+}
+
+img {
+  width: 100%;
+}

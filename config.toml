@@ -1,0 +1,18 @@
+base_url = "https://skoove.dev"
+compile_sass = true
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+
+[markdown]
+highlight_code = true
+highlight_theme = "gruvbox-dark"
+bottom_footnotes = true
+insert_anchor_links = "heading"
+
+[extra]
+nav = [
+  { name = "blog", path = "/blog" },
+  { name = "about", path = "/about" },
+  { name = "now", path = "/now" }
+]

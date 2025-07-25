@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  {{ page.title }}
+</h1>
+<nav class="page-nav">
+  {% if page.higher %}
+  <a class="next-page" href="{{ page.higher.permalink }}">&lt {{ page.higher.title }}</a>
+  {% endif %}
+  {% if page.lower %}
+  <a class="previous-page" href="{{ page.lower.permalink }}">{{ page.lower.title }} &gt </a>
+  {% endif %}
+</nav>
+<p class="subtitle"><strong>{{ page.date }}</strong></p>
+{{ page.content | safe }}
+{% endblock content %}
