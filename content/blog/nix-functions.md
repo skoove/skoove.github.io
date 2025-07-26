@@ -29,8 +29,6 @@ Here `add` can take in 2 numbers `num_1` and `num_2` and return the result of ad
 
 [^anon_functions]: You can write any function in parentheses like this, these are called anonymous functions, just meaning any function with no label. You only need to assign a function a name with the `let in` syntax if it needs it, otherwise you can just omit the name completely, for example if you were using the function as an input to another function.
 
-Providing multiple arguments in this way in functional programming is called currying [^currying_wiki]
-
 An alternative way of creating functions is attribute sets. In reality, we are actually only passing a single argument in — the attribute set.
 
 ```nix
