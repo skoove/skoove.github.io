@@ -135,7 +135,7 @@ pre code {
 
 code {
   background-color: $base00;
-  border-radius: 05px;
+  border-radius: 5px;
   padding: 0.0em 0.3em;
   font-family: "JetBrains Mono", monospace;
 }
@@ -158,18 +158,4 @@ img {
 p.rss-feed a {
   color: $base0A;
   font-weight: bold;
-}
-
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: fade 0.3s ease both;
-}
-
-@keyframes fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
