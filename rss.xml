@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title></title>
+      <link>https://skoove.dev</link>
+      <description></description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://skoove.dev/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>nix functions</title>
+          <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/nix-functions/</link>
+          <guid>https://skoove.dev/blog/nix-functions/</guid>
+          <description xml:base="https://skoove.dev/blog/nix-functions/">&lt;h1 id=&quot;the-basics&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#the-basics&quot; aria-label=&quot;Anchor link for: the-basics&quot;&gt;the basics&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;f &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;arg&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;arg &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;f &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;5 &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# evaluates to 6
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Basic function syntax is simple, we provide one argument and get one output, and a function can only have one input and output. But what if we wanted multiple arguments?&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;multiple-arguments&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#multiple-arguments&quot; aria-label=&quot;Anchor link for: multiple-arguments&quot;&gt;multiple arguments&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;1 3 &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# evaluates to 4
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here &lt;code&gt;add&lt;&#x2F;code&gt; can take in 2 numbers &lt;code&gt;num_1&lt;&#x2F;code&gt; and &lt;code&gt;num_2&lt;&#x2F;code&gt; and return the result of adding both. But wait, didn&#x27;t I just say that a function can only have one input and output? Yes, but this function is two separate functions. The first function is &lt;code&gt;add&lt;&#x2F;code&gt; this function takes &lt;code&gt;num_1&lt;&#x2F;code&gt; and returns a function that takes &lt;code&gt;num_2&lt;&#x2F;code&gt; as an input&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-currying_wiki-1&quot;&gt;&lt;a href=&quot;#fn-currying_wiki&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. We can follow this by going through the function step by step.&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;add 1 3&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;(num_1: num_2: num_1 + num_2) 1 3&lt;&#x2F;code&gt; &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-anon_functions-1&quot;&gt;&lt;a href=&quot;#fn-anon_functions&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;(num_2: 1 + num_2) 3&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;1 + 3&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;An alternative way of creating functions is attribute sets. In reality, we are actually only passing a single argument in — the attribute set.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;num_2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span&gt;; } &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# evaluates to 7
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;An attribute set is just a set of keys and values. To say that we want our function to take in an attribute set, we provide a comma-separated list of the keys we should have enclosed &lt;code&gt;{}&lt;&#x2F;code&gt;, &lt;code&gt;{ num_1 , num_2 }:&lt;&#x2F;code&gt; followed by the function itself &lt;code&gt;num_1 + num_2&lt;&#x2F;code&gt;. To call the function we need to construct an attribute set, done by providing the keys and values separated by &lt;code&gt;;&lt;&#x2F;code&gt; and enclosed with &lt;code&gt;{}&lt;&#x2F;code&gt;. This is a more simple, but more verbose way of providing arguments, but is often the better choice for clarity when you have several arguments (in my opinion).&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;example&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#example&quot; aria-label=&quot;Anchor link for: example&quot;&gt;example&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;... &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;services&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;caddy &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;enable &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;virtualHosts &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;mkReverseProxy &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;domain&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;ip&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#fdf4c1aa;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;domain&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#fdf4c1aa;&quot;&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;extraConfig &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;            tls internal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;            reverse_proxy &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#b8bb26;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;ip&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#b8bb26;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt; {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;              transport http {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;                tls
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;                tls_insecure_skip_verify
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;              }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;            }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;          &amp;#39;&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;      };
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;proxies &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;        { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;domain &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;proxmox-1.home.com&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;ip &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;192.168.0.230:8006&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;span&gt;        { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;domain &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;proxmox-2.home.com&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;ip &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;192.168.0.231:8006&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;span&gt;        { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;domain &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;jellyfin.home.com&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;ip &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;localhost:8096&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;span&gt;      ];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;foldl&amp;#39; &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;acc&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;val&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;acc &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;&#x2F;&#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;mkReverseProxy val&lt;&#x2F;span&gt;&lt;span&gt;) {} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;proxies&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here, we have a few things, we define a function &lt;code&gt;mkReverseProxy&lt;&#x2F;code&gt; which takes in an attribute with keys &lt;code&gt;domain&lt;&#x2F;code&gt; and &lt;code&gt;ip&lt;&#x2F;code&gt; which simply does some string interpolation to generate the &lt;a href=&quot;https:&#x2F;&#x2F;caddyserver.com&#x2F;&quot;&gt;caddy&lt;&#x2F;a&gt; configuration for reverse proxies. In the &lt;code&gt;proxies&lt;&#x2F;code&gt; array we create a few of the function inputs then use &lt;code&gt;builtins.foldl&#x27;&lt;&#x2F;code&gt;. Let&#x27;s look closer at the &lt;code&gt;foldl&#x27;&lt;&#x2F;code&gt; call. &lt;code&gt;foldl&#x27;&lt;&#x2F;code&gt; takes in 3 arguments: a function to apply to each member of the list, &lt;code&gt;(acc: val: acc &#x2F;&#x2F; mkReverseProxy val)&lt;&#x2F;code&gt; a starting state of the new value &lt;code&gt;{}&lt;&#x2F;code&gt; and the list itself &lt;code&gt;proxies&lt;&#x2F;code&gt;. The function we apply to the list simply appends the result of running &lt;code&gt;mkReverseProxy&lt;&#x2F;code&gt; on the value from &lt;code&gt;proxies&lt;&#x2F;code&gt; to the end of our accumulator (the attribute set with the starting state &lt;code&gt;{}&lt;&#x2F;code&gt;) using the &lt;code&gt;&#x2F;&#x2F;&lt;&#x2F;code&gt; syntax for joining attribute sets.&lt;&#x2F;p&gt;
+&lt;p&gt;Hey... that syntax at the top that&#x27;s in every single one of your configuration files for NixOS looks suspiciously like a function definition...&lt;&#x2F;p&gt;
+&lt;p&gt;Thank you &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;user&#x2F;ecco256&#x2F;&quot;&gt;u&#x2F;ecco256&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;user&#x2F;C0V3RT_KN1GHT&#x2F;&quot;&gt;u&#x2F;C0V3RT_KN1GHT&lt;&#x2F;a&gt; for helping improve this!&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-currying_wiki&quot;&gt;
+&lt;p&gt;This is called currying. For more information see the Wikipedia article &lt;a href=&quot;https:&#x2F;&#x2F;wikipedia.org&#x2F;wiki&#x2F;Currying&quot;&gt;wikipedia.org&#x2F;wiki&#x2F;Currying&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-currying_wiki-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-anon_functions&quot;&gt;
+&lt;p&gt;You can write any function in parentheses like this, these are called anonymous functions, just meaning any function with no label. You only need to assign a function a name with the &lt;code&gt;let in&lt;&#x2F;code&gt; syntax if it needs it, otherwise you can just omit the name completely, for example if you were using the function as an input to another function. &lt;a href=&quot;#fr-anon_functions-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;section&gt;
+</description>
+      </item>
+      <item>
+          <title>undersea devlog #1</title>
+          <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/undersea-devlog-1/</link>
+          <guid>https://skoove.dev/blog/undersea-devlog-1/</guid>
+          <description xml:base="https://skoove.dev/blog/undersea-devlog-1/">&lt;p&gt;It has been two days since I started working on undersea, and its going well!&lt;&#x2F;p&gt;
+&lt;p&gt;I have implemented the basics of the library, you can now add shows, retrive data about your shows and their episodes! I have started doing some basic work on learning ratatui to create the tui, which will now be developed along side the library. This allows me the focus in the scope of the library as I add the features that the tui provides.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;things-missing-from-library-that-i-can-think-of&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#things-missing-from-library-that-i-can-think-of&quot; aria-label=&quot;Anchor link for: things-missing-from-library-that-i-can-think-of&quot;&gt;things missing from library (that i can think of)&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Retriving episode duration.
+&lt;ul&gt;
+&lt;li&gt;This is quite hard! it is what most of the devlopment time was actually spent on for the past two days. It is shockingly difficult to get the duration of an episode, as you need to decode the mp3 file up until the point where things like images stop to get a frame to get the bitrate, and that is upwards of 3mb. For the hundreds and likely thousands of episodes in all podcasts someone would have added, that is multiple gigabytes of data transfer just to get the durations. I plan to work around this by having duration calculation just be something that app implementations call, probably when you attempt to play an episode, or if there is a resume duration stored, but no total duration.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Saving to file
+&lt;ul&gt;
+&lt;li&gt;This is a core feature, but not one I think is difficult, I will probably regret this&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Removing podcasts&lt;&#x2F;li&gt;
+&lt;li&gt;Sorting podcasts
+&lt;ul&gt;
+&lt;li&gt;Sorting will be done by sorting the vector that episodes are stored in. The vector will be ordered oldest first, and then app implementations can have a button that swaps the display order&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Marking episodes as finished&lt;&#x2F;li&gt;
+&lt;li&gt;Setting resume duration of episodes&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;things-missing-from-tui&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#things-missing-from-tui&quot; aria-label=&quot;Anchor link for: things-missing-from-tui&quot;&gt;things missing from tui&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;everything&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</description>
+      </item>
+      <item>
+          <title>i am making a new podcast program</title>
+          <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/i-am-making-a-new-podcast-program/</link>
+          <guid>https://skoove.dev/blog/i-am-making-a-new-podcast-program/</guid>
+          <description xml:base="https://skoove.dev/blog/i-am-making-a-new-podcast-program/">&lt;p&gt;If you want to listen to podcasts, you have a few options: Spotify, YouTube, Apple Podcasts, or RSS. RSS is great, but it lacks the quality of life features that these other providers have. For me the biggest two things that are missing are ordering episodes in order of oldest to newest (I listen to alot of fiction podcasts) and being able to resume a podcast &lt;em&gt;across devices&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;I am hoping to resolve this by making my own program that has everything &lt;em&gt;I&lt;&#x2F;em&gt; personally want, and maybe what alot of other people are missing. I  want it to be super easy to make a new app for any platform, and to store all of its data in easy to parse files, so its not too hard to move to a different platform if it does not work for you.&lt;&#x2F;p&gt;
+&lt;p&gt;The basic idea is to store two things, Your list of subscribed podcasts, weather you have watched or not watched an episode, and the point where you left an episode off.&lt;&#x2F;p&gt;
+&lt;p&gt;This is to just give you a better idea of what I mean, this will change.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;Feed &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;url&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;episodes&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fabd2f;&quot;&gt;Vec&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;Episode&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;Episode &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;url&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;media_url&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;date&lt;&#x2F;span&gt;&lt;span&gt;: DateTime&amp;lt;Utc&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;duration&lt;&#x2F;span&gt;&lt;span&gt;: time::Duration,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;resume_time&lt;&#x2F;span&gt;&lt;span&gt;: time::Duration,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Initially, I will make a tui application, and an andriod app after that, maybe later I can make a gui and ios app, but thats only if I can make those first two into a useable program.&lt;&#x2F;p&gt;
+&lt;p&gt;If you are intrested, take a at the repo on &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;skoove&#x2F;undersea&quot;&gt;github&lt;&#x2F;a&gt;, and considor contributing or giving it a star.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>how i made the psx style doughnut</title>
+          <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/how-i-made-the-psx-style-doughnut/</link>
+          <guid>https://skoove.dev/blog/how-i-made-the-psx-style-doughnut/</guid>
+          <description xml:base="https://skoove.dev/blog/how-i-made-the-psx-style-doughnut/">&lt;video autoplay loop style=&quot;width: 100%&quot;&gt;  
+  &lt;source src=&quot;.&#x2F;doughnut.mp4&quot; type=&quot;video&#x2F;mp4&quot;&gt;  
+&lt;&#x2F;video&gt;
+&lt;p&gt;I want to clarify that when I say &quot;ps1&#x2F;psx style&quot; I mean style, I am not going for a exact replica of the way those platforms looked, because that does not interest me, but I think that taking elements of that such as vertex wobble, and things that are not actually from those platforms, like colour compression and dithering and combining them with modern rendering techniques like reflection bloom and raytracing can have a very pretty result, and its something I want to experiment with much more in the future.&lt;&#x2F;p&gt;
+&lt;p&gt;I first got the idea to pursue this style from &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=2a_VtQJHkb8&quot;&gt;this video&lt;&#x2F;a&gt; by &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;@RetroPlus&quot;&gt;Retro Plus&lt;&#x2F;a&gt;. This video shows their workflow with shoebox texture ripper and a &lt;a href=&quot;https:&#x2F;&#x2F;lucasroedel.gumroad.com&#x2F;l&#x2F;psx_snapping&quot;&gt;PSX vertex snapping addon by Lucas Roedel&lt;&#x2F;a&gt;. I took those two for this project, but the PSX vertex snapping addon had some issues that just would not work for my workflow so will not be used by me for most things in future.&lt;&#x2F;p&gt;
+&lt;p&gt;The addon can get a very very authentic effect, but it comes at a cost. The addon works with a 3d grid which it snaps all the vertices too, and you can choose how large the grid is. I did not think about this very hard, and definitely did not consider that the amount of vertices would be $n^3$ when I selected 400. $400^3$ is 64 000 000, which took up 12 gigabytes of memory and was very slow.&lt;&#x2F;p&gt;
+&lt;p&gt;I did not actually need a grid that large, 50 would have been plenty, but its still a lot more overhead than I was willing to have for an effect like that. I fumbled in geometry nodes for a while trying to round all the vertex positions to a set point but could not get that to work, and that would also not make the vertices to move when the object did not move, and that is realistic, but not what I want.&lt;&#x2F;p&gt;
+&lt;p&gt;I gave up for a bit until I received this reddit comment:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&quot;For performance sake, did you consider a displacement modifier with a noise texture attached to a constantly-rotating object? It wouldn&#x27;t be quite as accurate, but it would perform about 200% better.&quot;
+- &lt;em&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;user&#x2F;Independent_Sea_6317&#x2F;&quot;&gt;RatKingbutwithHumanChildren&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;So I now use that method, a noise texture on the object with an empty constantly moving.&lt;&#x2F;p&gt;
+&lt;p&gt;For the textures, as mentioned earlier I used &lt;a href=&quot;https:&#x2F;&#x2F;renderhjs.net&#x2F;shoebox&#x2F;&quot;&gt;shoebox texture ripper&lt;&#x2F;a&gt; and got this texture that I just painted a little to remove some harsh transitions.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;how-i-made-the-psx-style-doughnut&#x2F;.&#x2F;doughnut%20sprite.png&quot; alt=&quot;doughnut texture&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I also made a little shader for the doughnut to give the icing a little reflection&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;how-i-made-the-psx-style-doughnut&#x2F;.&#x2F;doughnut%20shader.png&quot; alt=&quot;the dougnuts shader&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;That is pretty much it! It was a lot of fun to make and I learnt a lot about the eevee renderer and how powerful it is so I think I will try and use it for future photorealistic-ish things!&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>
