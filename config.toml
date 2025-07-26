@@ -16,3 +16,20 @@ nav = [
   { name = "about", path = "/about" },
   { name = "now", path = "/now" }
 ]
+
+# src is required
+# [[extra.badges]]
+# src = ""
+# href = ""
+# hover_text = ""
+
+[[extra.badges]]
+src = "/badges/brain-made-mark.png"
+href = "https://brainmade.org"
+hover_text = "no ai is used in the creation of anything i make"
+
+[[extra.badges]]
+src = "/badges/free.gif"
+href = ""
+hover_text = ""
+

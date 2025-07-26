@@ -1,0 +1,9 @@
+.badge img {
+  width: auto;
+  image-rendering: pixelated;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+}

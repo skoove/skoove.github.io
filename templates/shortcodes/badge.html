@@ -1,0 +1,5 @@
+<div class="badge">
+  {% if href %}<a href="{{ href }}">{% endif %}
+    <img src="/badges/{{ src }}" {% if hover_text %} title="{{ hover_text }}" {% endif %}>
+  {% if href %}</a>{% endif %}
+</div>
