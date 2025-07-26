@@ -73,4 +73,6 @@ An attribute set is just a set of keys and values. To say that we want our funct
 
 Here, we have a few things, we define a function `mkReverseProxy` which takes in an attribute with keys `domain` and `ip` which simply does some string interpolation to generate the [caddy](<https://caddyserver.com/>) configuration for reverse proxies. In the `proxies` array we create a few of the function inputs then use `builtins.foldl'`. Let's look closer at the `foldl'` call. `foldl'` takes in 3 arguments: a function to apply to each member of the list, `(acc: val: acc // mkReverseProxy val)` a starting state of the new value `{}` and the list itself `proxies`. The function we apply to the list simply appends the result of running `mkReverseProxy` on the value from `proxies` to the end of our accumulator (the attribute set with the starting state `{}`) using the `//` syntax for joining attribute sets.
 
+Hey... that syntax at the top that's in every single one of your configuration files for NixOS looks suspiciously like a function definition...
+
 ---
