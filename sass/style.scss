@@ -1,6 +1,10 @@
 @import "./base16/gruvbox-dark-medium.scss";
 @import "./badges.scss";
 
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
 body {
   background-color: $base01;
 }
@@ -10,6 +14,7 @@ body {
   text-align: justify;
   text-justify: inter-word;
   line-height: 1.5em;
+  font-family: "Rubrik", sans-serif;
 }
 
 header {
@@ -120,34 +125,25 @@ a:hover {
 pre {
   padding: 1rem;
   border-radius: 20px;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+pre code {
+  padding-left: 0;
 }
 
 code {
   background-color: $base00;
   border-radius: 05px;
-  padding: 0.2em 0.5em;
+  padding: 0.0em 0.3em;
+  font-family: "JetBrains Mono", monospace;
 }
 
-/* Container: space out footnotes a bit */
-.footnote-definition {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin: 0.5rem 0;
-  font-size: 0.85rem;
-  color: $base05;
-}
-
-/* Superscript number */
-.footnote-definition-label {
-  font-size: 0.75rem;
-  vertical-align: super;
-  color: $base08;
-}
-
-/* Optional: turn number into a back link */
-.footnote-definition-label::after {
-  content: ".";
+code span {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  word-wrap: normal;
 }
 
 img {
