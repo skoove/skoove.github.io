@@ -1,7 +1,6 @@
 +++
 title = "arma 3 on linux"
 date = 2025-07-27
-draft = true
 +++
 
 # how to get arma 3 running on linux with radio mods
