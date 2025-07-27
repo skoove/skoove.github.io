@@ -33,7 +33,10 @@ The game may not lock your mouse to the window, if this is the case run protontr
 The reason I do not use gamescope, is that this method requires running the launcher, the game, teamspeak and wine explorer. Gamescope simply cannot handle this.
 
 ## bonus extra resources!
-
+- Some people have had setting the game to borderless window fix the mouse exiting the window
+- [arma-3-unix-launcher](<https://github.com/muttleyxd/arma3-unix-launcher>)
+- [helper script](<https://github.com/ninelore/armaonlinux/blob/master/Arma3Helper.sh>)
+- [arma 3 on unix discord](<https://discord.gg/624zAJvbkR>) thank you everyone here <3
 
 ![winecfg](./winecfg.png)
 
