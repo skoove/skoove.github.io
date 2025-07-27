@@ -12,6 +12,7 @@ i like to do a lot of things, but im not very good at most of them.
 # freinds sites
 - axlefublr: [axlefublr.github.io](https://axlefublr.github.io/)
 - cinderowo: [cinderowo.github.io](https://cinderowo.github.io/)
+- danial: [ficd.sh](<https://ficd.sh/>)
 
 website made with [zola](<https://getzola.org/>) \
 [source](<https://github.com/skoove/website/>)
