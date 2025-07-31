@@ -38,4 +38,6 @@ website made with [zola](<https://getzola.org/>) \
 {{ badge(src="trans.gif" hover_text="this website is powered by trasgenderism" ) }}
 
 {{ badge(src="ublock.png" href="https://ublockorigin.com/") }}
+
+{{ badge(src="nix_fixes_that.png" href="https://nixos.org/" hover_text="i made this badge :D")}}
 <div>
