@@ -40,4 +40,18 @@ website made with [zola](<https://getzola.org/>) \
 {{ badge(src="ublock.png" href="https://ublockorigin.com/") }}
 
 {{ badge(src="nix_fixes_that.png" href="https://nixos.org/" hover_text="i made this badge :D")}}
+
+{{ badge(src="firefox.gif" href="https://www.firefox.com/" hover_text="get off chromium! (no! brave is not better!)") }}
+
+{{ badge(src="blender.gif" href="https://fund.blender.org/" hover_text="go donate!") }}
+
+{{ badge(src="thunderbird.gif" href="https://www.thunderbird.net") }}
+
+{{ badge(src="kys.png") }}
+
+{{ badge(src="kglw.png" href="https://kinggizzardandthelizardwizard.com/" hover_text="16 HORSES GALLOPING!!!!!!!!!") }}
+
+{{ badge(src="jellyfin.gif" href="https://jellyfin.org/") }}
+
+{{ badge(src="linux.gif" href="https://distrowatch.com/random.php") }}
 <div>
