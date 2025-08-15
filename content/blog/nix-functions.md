@@ -9,7 +9,7 @@ let f = arg: arg + 1; in
 f 5 # evaluates to 6
 ```
 
-Basic function syntax is simple, we provide one argument and get one output, and a function can only have one input and output. But what if we wanted multiple arguments?
+Basic function syntax is simple, we provide one argument and get one output, and a function can only have one input and output. But what if we wanted multiple armament?
 
 ## multiple arguments
 
