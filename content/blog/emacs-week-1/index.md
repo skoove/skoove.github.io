@@ -6,7 +6,7 @@ title = "emacs week 1"
 I decided to try using emacs, because I had heard about it a lot and it seems like it can do a lot of things that my editor (helix) cannot. I have been very very pleasantly surprised about how it has been!
 
 # packages
-I use nix, so I would like nix to also manage my packages. The [nixos wiki page for nix](<https://nixos.wiki/wiki/Emacs>) page details some ways to do this. One way is to use the community overlay and have it read your config, find `use-package` calls then install, but that would mean rebuilding my system for every emacs config change, which is a 1min + operation and I would like to be able to iterate and change little things a bit faster than that. That solution also felt more oriented to people who were already using emacs with an existing configuration that they just want to work and configure how they are used to configuration it. I chose to let nix do *all* of the package management.
+I use nix, so I would like nix to also manage my packages. The [nixos wiki page for emacs](<https://nixos.wiki/wiki/Emacs>) page details some ways to do this. One way is to use the community overlay and have it read your config, find `use-package` calls then install, but that would mean rebuilding my system for every emacs config change, which is a 1min + operation and I would like to be able to iterate and change little things a bit faster than that. That solution also felt more oriented to people who were already using emacs with an existing configuration that they just want to work and configure how they are used to configuration it. I chose to let nix do *all* of the package management.
 
 ``` nix
   programs.emacs = {
