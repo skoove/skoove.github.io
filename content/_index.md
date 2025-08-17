@@ -27,6 +27,8 @@ website made with [zola](<https://getzola.org/>) \
 
 ---
 <div class="badges">
+{{ badge(src="skoovedev.png" href="https://skoove.dev") }}
+
 {{ badge(src="brain-made-mark.png" href="https://brainmade.org" hover_text="made with my brain") }}
 
 {{ badge(src="free-software.gif") }}
