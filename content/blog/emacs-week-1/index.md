@@ -112,4 +112,4 @@ I will probably keep using emacs for quite a while. It is a very good editor (wh
 
 If you use emacs and have advice, please let me know somewhere. Especially org-mode related, I am very excited to get more into that!
 
-My config is available at: https://github.com/skoove/dotfiles/tree/main/home-modules/emacs
+My config is available at: <https://github.com/skoove/dotfiles/tree/main/home-modules/emacs>
