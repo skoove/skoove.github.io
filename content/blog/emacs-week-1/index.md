@@ -92,7 +92,9 @@ It is kind of shitty and barely works, In helix I just set 2 rulers but I could 
 There are some things I do not like that much so far
 
 ## slow
-Emacs is slow, this is the trade off for it's power, but it takes 700 ms to launch the client even when running in the client-server mode. Not much I can do about this :(.
+~~Emacs is slow, this is the trade off for it's power, but it takes 700 ms to launch the client even when running in the client-server mode. Not much I can do about this :(.~~
+
+edit 2025-08-18: This was a misunderstanding of what the dashboard was telling me, it was actually showing that the daemon took 700 ms to launch, launching new frames is significantly faster, though there is still a noticble slowness, for example when opening an org buffer.
 
 ## window and buffer management feels clunky
 This is mostly because I am not used to it and because the default hotkeys suck a bit, I need to make something to just save and kill the open buffer, and find a nicer way to cleanup my buffer list without `C-x k` every time. 
