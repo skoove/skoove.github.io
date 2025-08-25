@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/style.css">
+  
+  <title>skoove.dev - emacs week 1</title>
+  
+
+  
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://skoove.dev/rss.xml">
+  
+</head>
+
+<body>
+  <header>
+    <a href="/">
+      <h1 class="site_name">skoove.dev</h1>
+    </a>
+
+    <nav>
+      
+      <li><a href="&#x2F;blog">
+          <h1 class="nav_button">blog</h1>
+        </a></li>
+      
+      <li><a href="&#x2F;about">
+          <h1 class="nav_button">about</h1>
+        </a></li>
+      
+      <li><a href="&#x2F;now">
+          <h1 class="nav_button">now</h1>
+        </a></li>
+      
+    </nav>
+  </header>
+  <hr>
+
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  emacs week 1
+</h1>
+<nav class="page-nav">
+  
+  <a class="next-page" href="https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;just-wanting-to-help&#x2F;">&lt just wanting to help</a>
+  
+  
+</nav>
+<p class="subtitle"><strong>2025-08-17</strong></p>
+<p>I decided to try using emacs, because I had heard about it a lot and it seems like it can do a lot of things that my editor (helix) cannot. I have been very very pleasantly surprised about how it has been!</p>
+<h1 id="packages"><a class="zola-anchor" href="#packages" aria-label="Anchor link for: packages">packages</a></h1>
+<p>I use nix, so I would like nix to also manage my packages. The <a href="https://nixos.wiki/wiki/Emacs">nixos wiki page for emacs</a> page details some ways to do this. One way is to use the community overlay and have it read your config, find <code>use-package</code> calls then install, but that would mean rebuilding my system for every emacs config change, which is a 1min + operation and I would like to be able to iterate and change little things a bit faster than that. That solution also felt more oriented to people who were already using emacs with an existing configuration that they just want to work and configure how they are used to configuration it. I chose to let nix do <em>all</em> of the package management.</p>
+<pre data-lang="nix" style="background-color:#282828;color:#fdf4c1aa;" class="language-nix "><code class="language-nix" data-lang="nix"><span>  </span><span style="color:#fdf4c1;">programs</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">emacs </span><span style="background-color:#932b1e;color:#fdf4c1;">=</span><span> {
+</span><span>    </span><span style="color:#8ec07c;">enable </span><span style="color:#fe8019;">= </span><span style="color:#d3869b;">true</span><span>;
+</span><span>    </span><span style="color:#8ec07c;">package </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">with </span><span style="color:#fdf4c1;">pkgs</span><span>; (
+</span><span>      (</span><span style="color:#fdf4c1;">emacsPackagesFor emacs</span><span>)</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">emacsWithPackages </span><span>(
+</span><span>        </span><span style="color:#fdf4c1;">epkgs</span><span>: </span><span style="color:#fa5c4b;">with </span><span style="color:#fdf4c1;">epkgs</span><span>; [
+</span><span>		  </span><span style="font-style:italic;color:#928374;"># this is not all packages i have,
+</span><span>		  </span><span style="font-style:italic;color:#928374;"># just what i had when i was taking notes on this
+</span><span>          </span><span style="color:#fdf4c1;">vertico
+</span><span>          </span><span style="color:#fdf4c1;">orderless
+</span><span>          </span><span style="color:#fdf4c1;">marginalia
+</span><span>          </span><span style="color:#fdf4c1;">direnv
+</span><span>        ]
+</span><span>      )
+</span><span>    );
+</span><span>  }</span><span style="background-color:#932b1e;color:#fdf4c1;">;</span><span>
+</span></code></pre>
+<p>Neat! now I only need to rebuild when I add a new package instead of for every config change. I just use home-manager to make an out of store symlink from my dotfiles to <code>~/.emacs</code> so that I do not need to rebuild for that either.</p>
+<pre data-lang="nix" style="background-color:#282828;color:#fdf4c1aa;" class="language-nix "><code class="language-nix" data-lang="nix"><span>  </span><span style="color:#fdf4c1;">home</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">file</span><span style="color:#fe8019;">.</span><span style="color:#b8bb26;">&quot;.emacs&quot;</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">source </span><span style="background-color:#932b1e;color:#fdf4c1;">=</span><span> </span><span style="color:#fdf4c1;">config</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">lib</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">file</span><span style="color:#fe8019;">.</span><span style="color:#fdf4c1;">mkOutOfStoreSymlink </span><span style="color:#b8bb26;">home/zie/.dotfiles/home-modules/emacs/emacs.el</span><span style="background-color:#932b1e;color:#fdf4c1;">;</span><span>
+</span></code></pre>
+<p>One last thing is to stop <code>use-package</code> trying to download anything, because that is nix's job, but I <em>do</em> want to use <code>use-package</code> to configure packages.</p>
+<pre data-lang="emacs-lisp" style="background-color:#282828;color:#fdf4c1aa;" class="language-emacs-lisp "><code class="language-emacs-lisp" data-lang="emacs-lisp"><span>(setq use-package-always-ensure nil)
+</span></code></pre>
+<p>Now that we have packages, I want to talk about everything I enjoy so far.</p>
+<h1 id="enjoy"><a class="zola-anchor" href="#enjoy" aria-label="Anchor link for: enjoy">enjoy</a></h1>
+<h2 id="meow-mrrp"><a class="zola-anchor" href="#meow-mrrp" aria-label="Anchor link for: meow-mrrp">meow (mrrp)</a></h2>
+<p><a href="https://github.com/meow-edit/meow">meow</a> is really really good. I come from helix, so it feels very familiar to me. I was going to build everything for actually editing from scratch but I am glad I gave up on that pretty quickly and just used <code>meow</code>.</p>
+<h2 id="org"><a class="zola-anchor" href="#org" aria-label="Anchor link for: org">org</a></h2>
+<p>Holy shit. I have been trying to replace obsidian for so long, it is slow, not open source and just a bit yucky to use sometimes. I had heard of org before and is part of the reason I am trying emacs in the first place. I am still <em>not quite</em> sure how I want to use it, I am used to atomic notes for everything, but org seems like it may be more powerful with larger notes. I so far have used it to take notes for and draft 2 blog posts (this one and the <a href="/blog/just-wanting-to-help">clippy one</a>.</p>
+<h3 id="font-face-things"><a class="zola-anchor" href="#font-face-things" aria-label="Anchor link for: font-face-things">font face things</a></h3>
+<p>Since I use emacs as the gui application, I can do some fun stuff with org font faces, like making headings bigger. I actually did this in the markdown mode too since I still write the posts in markdown. Something I would like to play with is a kind of live preview like obsidian has, as I really like that feature.</p>
+<h3 id="typst-math"><a class="zola-anchor" href="#typst-math" aria-label="Anchor link for: typst-math">typst math</a></h3>
+<p>I love typst, I am not a big fan of latex / mathjax. I can do typst maths using <a href="https://github.com/remimimimimi/org-typst-preview.el">org-typst-preview.el</a>. It is a bit more clunky to use than I am used to with obsidian (i need to manually turn on and off rendering and had to write my own function to toggle the whole buffer) but it is worth it for being able to write AND preview maths in a solid modal editor and with a sensible markup language like typst.</p>
+<p>Working out how to install it with nix took a little learning but I realised that it is not a package and in fact just a single elisp file so I just used <code>fetchFromGithub</code> and symlinked it into my <code>.emacs.d/lisp/</code> folder and then import it to the lisp config!</p>
+<h2 id="multiple-os-windows-frames-for-one-editor"><a class="zola-anchor" href="#multiple-os-windows-frames-for-one-editor" aria-label="Anchor link for: multiple-os-windows-frames-for-one-editor">multiple os windows (frames) for one editor</a></h2>
+<p>This one is great for me, I have a window manager I love (niri) so I want it to do the work of managing my windows. Since emacs can have mutliple os windows (called frames) I can let it do that. I just made a hotkey to make a new frame and I am set!</p>
+<h2 id="custom-git-commit-message-editing-mode"><a class="zola-anchor" href="#custom-git-commit-message-editing-mode" aria-label="Anchor link for: custom-git-commit-message-editing-mode">custom git commit message editing mode</a></h2>
+<p>I like having some fancy things for my git commit message editing so that I can keep the header to 50 and wrap the body, I could not find anything to do this in emacs (except magit i think can do it, but i just use the cli for everything) so I made my own major mode for it. It warns me when I go over 50 characters in the first line and hard wraps at 76 characters.</p>
+<pre data-lang="emacs-lisp" style="background-color:#282828;color:#fdf4c1aa;" class="language-emacs-lisp "><code class="language-emacs-lisp" data-lang="emacs-lisp"><span>(define-derived-mode zie-git-commit-mode text-mode &quot;ziegitcommit&quot;
+</span><span>  &quot;majour mode for git commit messages&quot;
+</span><span>  (setq-local fill-column 72)
+</span><span>  (auto-fill-mode 1)
+</span><span>  (setq-local comment-start &quot;#&quot;)
+</span><span>
+</span><span>  (defun zie/git-header-warning (limit)
+</span><span>    &quot;highlight header longer than 50 chars&quot;
+</span><span>    (and (&lt;= (line-number-at-pos) 1)
+</span><span>         (re-search-forward (format &quot;^.\\{%d\\}\\(.*\\)$&quot; (1+ 50)) limit t)))
+</span><span>
+</span><span>  (font-lock-add-keywords
+</span><span>   nil `((zie/git-header-warning 0 font-lock-warning-face prepend)))
+</span><span>  (let ((map zie-git-commit-mode-map))
+</span><span>    (define-key map (kbd &quot;C-c C-c&quot;)
+</span><span>		(lambda ()
+</span><span>		  (interactive)
+</span><span>		  (save-buffer)
+</span><span>		  (kill-buffer)))))
+</span><span>
+</span><span>(add-to-list &#39;auto-mode-alist
+</span><span>	     &#39;(&quot;/\\.git/COMMIT_EDITMSG\\&#39;&quot; . zie-git-commit-mode))
+</span></code></pre>
+<p>It is kind of shitty and barely works, In helix I just set 2 rulers but I could not find a nice way to do that in emacs :(. It is something I need to look at further.</p>
+<h1 id="things-i-do-not-like"><a class="zola-anchor" href="#things-i-do-not-like" aria-label="Anchor link for: things-i-do-not-like">things i do not like</a></h1>
+<p>There are some things I do not like that much so far</p>
+<h2 id="slow"><a class="zola-anchor" href="#slow" aria-label="Anchor link for: slow">slow</a></h2>
+<p><del>Emacs is slow, this is the trade off for it's power, but it takes 700 ms to launch the client even when running in the client-server mode. Not much I can do about this :(.</del></p>
+<p>edit 2025-08-18: This was a misunderstanding of what the dashboard was telling me, it was actually showing that the daemon took 700 ms to launch, launching new frames is significantly faster, though there is still a noticble slowness, for example when opening an org buffer.</p>
+<h2 id="window-and-buffer-management-feels-clunky"><a class="zola-anchor" href="#window-and-buffer-management-feels-clunky" aria-label="Anchor link for: window-and-buffer-management-feels-clunky">window and buffer management feels clunky</a></h2>
+<p>This is mostly because I am not used to it and because the default hotkeys suck a bit, I need to make something to just save and kill the open buffer, and find a nicer way to cleanup my buffer list without <code>C-x k</code> every time.</p>
+<p>Window management was helped greatly by not using windows and only using frames instead, it feels so good, I love it so much.</p>
+<h2 id="need-to-restart-emacs-service-on-many-config-changes"><a class="zola-anchor" href="#need-to-restart-emacs-service-on-many-config-changes" aria-label="Anchor link for: need-to-restart-emacs-service-on-many-config-changes">need to restart <code>emacs.service</code> on many config changes</a></h2>
+<p>Sometimes I change something and need to restart the service, minor issue but probably something I can fix, I am thinking a function that evaluates a default config, then evaluates mine to essentially reset the config state.</p>
+<h2 id="direnv-switches-enviroment-every-time-i-switch-buffer"><a class="zola-anchor" href="#direnv-switches-enviroment-every-time-i-switch-buffer" aria-label="Anchor link for: direnv-switches-enviroment-every-time-i-switch-buffer">direnv switches enviroment every time i switch buffer</a></h2>
+<p>I use direnv to automatically use my nix dev environments, but when I switch between buffers it switches environment. I would prefer the environment be loaded locally for just that buffer but I do not know if that is possible. I will need to look into it.</p>
+<h1 id="conclusion"><a class="zola-anchor" href="#conclusion" aria-label="Anchor link for: conclusion">conclusion</a></h1>
+<p>I will probably keep using emacs for quite a while. It is a very good editor (when you download install and configure a good editor :p) but almost every default value feels very outdated, which is to be expected. I am loving how I can do seemingly everything I have wanted to do in helix but couldn't for whatever reason, and I am excited to keep using it.</p>
+<p>If you use emacs and have advice, please let me know somewhere. Especially org-mode related, I am very excited to get more into that!</p>
+<p>My config is available at: <a href="https://github.com/skoove/dotfiles/tree/main/home-modules/emacs">https://github.com/skoove/dotfiles/tree/main/home-modules/emacs</a></p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>

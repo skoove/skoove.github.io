@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/style.css">
+  
+  <title>skoove.dev - undersea devlog #1</title>
+  
+
+  
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://skoove.dev/rss.xml">
+  
+</head>
+
+<body>
+  <header>
+    <a href="/">
+      <h1 class="site_name">skoove.dev</h1>
+    </a>
+
+    <nav>
+      
+      <li><a href="&#x2F;blog">
+          <h1 class="nav_button">blog</h1>
+        </a></li>
+      
+      <li><a href="&#x2F;about">
+          <h1 class="nav_button">about</h1>
+        </a></li>
+      
+      <li><a href="&#x2F;now">
+          <h1 class="nav_button">now</h1>
+        </a></li>
+      
+    </nav>
+  </header>
+  <hr>
+
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  undersea devlog #1
+</h1>
+<nav class="page-nav">
+  
+  <a class="next-page" href="https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;i-am-making-a-new-podcast-program&#x2F;">&lt i am making a new podcast program</a>
+  
+  
+  <a class="previous-page" href="https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;nix-functions&#x2F;">nix functions &gt </a>
+  
+</nav>
+<p class="subtitle"><strong>2025-04-16</strong></p>
+<p>It has been two days since I started working on undersea, and its going well!</p>
+<p>I have implemented the basics of the library, you can now add shows, retrive data about your shows and their episodes! I have started doing some basic work on learning ratatui to create the tui, which will now be developed along side the library. This allows me the focus in the scope of the library as I add the features that the tui provides.</p>
+<h2 id="things-missing-from-library-that-i-can-think-of"><a class="zola-anchor" href="#things-missing-from-library-that-i-can-think-of" aria-label="Anchor link for: things-missing-from-library-that-i-can-think-of">things missing from library (that i can think of)</a></h2>
+<ul>
+<li>Retriving episode duration.
+<ul>
+<li>This is quite hard! it is what most of the devlopment time was actually spent on for the past two days. It is shockingly difficult to get the duration of an episode, as you need to decode the mp3 file up until the point where things like images stop to get a frame to get the bitrate, and that is upwards of 3mb. For the hundreds and likely thousands of episodes in all podcasts someone would have added, that is multiple gigabytes of data transfer just to get the durations. I plan to work around this by having duration calculation just be something that app implementations call, probably when you attempt to play an episode, or if there is a resume duration stored, but no total duration.</li>
+</ul>
+</li>
+<li>Saving to file
+<ul>
+<li>This is a core feature, but not one I think is difficult, I will probably regret this</li>
+</ul>
+</li>
+<li>Removing podcasts</li>
+<li>Sorting podcasts
+<ul>
+<li>Sorting will be done by sorting the vector that episodes are stored in. The vector will be ordered oldest first, and then app implementations can have a button that swaps the display order</li>
+</ul>
+</li>
+<li>Marking episodes as finished</li>
+<li>Setting resume duration of episodes</li>
+</ul>
+<h2 id="things-missing-from-tui"><a class="zola-anchor" href="#things-missing-from-tui" aria-label="Anchor link for: things-missing-from-tui">things missing from tui</a></h2>
+<ul>
+<li>everything</li>
+</ul>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
