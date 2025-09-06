@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+      <title></title>
+      <link>https://skoove.dev</link>
+      <description></description>
+      <generator>Zola</generator>
+      <language>en</language>
+      <atom:link href="https://skoove.dev/rss.xml" rel="self" type="application/rss+xml"/>
+      <lastBuildDate>Sun, 17 Aug 2025 00:00:00 +0000</lastBuildDate>
+      <item>
+          <title>emacs week 1</title>
+          <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/emacs-week-1/</link>
+          <guid>https://skoove.dev/blog/emacs-week-1/</guid>
+          <description xml:base="https://skoove.dev/blog/emacs-week-1/">&lt;p&gt;I decided to try using emacs, because I had heard about it a lot and it seems like it can do a lot of things that my editor (helix) cannot. I have been very very pleasantly surprised about how it has been!&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;packages&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#packages&quot; aria-label=&quot;Anchor link for: packages&quot;&gt;packages&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;I use nix, so I would like nix to also manage my packages. The &lt;a href=&quot;https:&#x2F;&#x2F;nixos.wiki&#x2F;wiki&#x2F;Emacs&quot;&gt;nixos wiki page for emacs&lt;&#x2F;a&gt; page details some ways to do this. One way is to use the community overlay and have it read your config, find &lt;code&gt;use-package&lt;&#x2F;code&gt; calls then install, but that would mean rebuilding my system for every emacs config change, which is a 1min + operation and I would like to be able to iterate and change little things a bit faster than that. That solution also felt more oriented to people who were already using emacs with an existing configuration that they just want to work and configure how they are used to configuration it. I chose to let nix do &lt;em&gt;all&lt;&#x2F;em&gt; of the package management.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;programs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;emacs &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#932b1e;color:#fdf4c1;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;enable &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;package &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;pkgs&lt;&#x2F;span&gt;&lt;span&gt;; (
+&lt;&#x2F;span&gt;&lt;span&gt;      (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;emacsPackagesFor emacs&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;emacsWithPackages &lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;epkgs&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;with &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;epkgs&lt;&#x2F;span&gt;&lt;span&gt;; [
+&lt;&#x2F;span&gt;&lt;span&gt;		  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# this is not all packages i have,
+&lt;&#x2F;span&gt;&lt;span&gt;		  &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# just what i had when i was taking notes on this
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;vertico
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;orderless
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;marginalia
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;direnv
+&lt;&#x2F;span&gt;&lt;span&gt;        ]
+&lt;&#x2F;span&gt;&lt;span&gt;      )
+&lt;&#x2F;span&gt;&lt;span&gt;    );
+&lt;&#x2F;span&gt;&lt;span&gt;  }&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#932b1e;color:#fdf4c1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Neat! now I only need to rebuild when I add a new package instead of for every config change. I just use home-manager to make an out of store symlink from my dotfiles to &lt;code&gt;~&#x2F;.emacs&lt;&#x2F;code&gt; so that I do not need to rebuild for that either.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;home&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;.emacs&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;source &lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#932b1e;color:#fdf4c1;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;config&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;lib&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;mkOutOfStoreSymlink &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;home&#x2F;zie&#x2F;.dotfiles&#x2F;home-modules&#x2F;emacs&#x2F;emacs.el&lt;&#x2F;span&gt;&lt;span style=&quot;background-color:#932b1e;color:#fdf4c1;&quot;&gt;;&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;One last thing is to stop &lt;code&gt;use-package&lt;&#x2F;code&gt; trying to download anything, because that is nix&#x27;s job, but I &lt;em&gt;do&lt;&#x2F;em&gt; want to use &lt;code&gt;use-package&lt;&#x2F;code&gt; to configure packages.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;emacs-lisp&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-emacs-lisp &quot;&gt;&lt;code class=&quot;language-emacs-lisp&quot; data-lang=&quot;emacs-lisp&quot;&gt;&lt;span&gt;(setq use-package-always-ensure nil)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now that we have packages, I want to talk about everything I enjoy so far.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;enjoy&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#enjoy&quot; aria-label=&quot;Anchor link for: enjoy&quot;&gt;enjoy&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;meow-mrrp&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#meow-mrrp&quot; aria-label=&quot;Anchor link for: meow-mrrp&quot;&gt;meow (mrrp)&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;meow-edit&#x2F;meow&quot;&gt;meow&lt;&#x2F;a&gt; is really really good. I come from helix, so it feels very familiar to me. I was going to build everything for actually editing from scratch but I am glad I gave up on that pretty quickly and just used &lt;code&gt;meow&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;org&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#org&quot; aria-label=&quot;Anchor link for: org&quot;&gt;org&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Holy shit. I have been trying to replace obsidian for so long, it is slow, not open source and just a bit yucky to use sometimes. I had heard of org before and is part of the reason I am trying emacs in the first place. I am still &lt;em&gt;not quite&lt;&#x2F;em&gt; sure how I want to use it, I am used to atomic notes for everything, but org seems like it may be more powerful with larger notes. I so far have used it to take notes for and draft 2 blog posts (this one and the &lt;a href=&quot;&#x2F;blog&#x2F;just-wanting-to-help&quot;&gt;clippy one&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;font-face-things&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#font-face-things&quot; aria-label=&quot;Anchor link for: font-face-things&quot;&gt;font face things&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Since I use emacs as the gui application, I can do some fun stuff with org font faces, like making headings bigger. I actually did this in the markdown mode too since I still write the posts in markdown. Something I would like to play with is a kind of live preview like obsidian has, as I really like that feature.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;typst-math&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#typst-math&quot; aria-label=&quot;Anchor link for: typst-math&quot;&gt;typst math&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;I love typst, I am not a big fan of latex &#x2F; mathjax. I can do typst maths using &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;remimimimimi&#x2F;org-typst-preview.el&quot;&gt;org-typst-preview.el&lt;&#x2F;a&gt;. It is a bit more clunky to use than I am used to with obsidian (i need to manually turn on and off rendering and had to write my own function to toggle the whole buffer) but it is worth it for being able to write AND preview maths in a solid modal editor and with a sensible markup language like typst.&lt;&#x2F;p&gt;
+&lt;p&gt;Working out how to install it with nix took a little learning but I realised that it is not a package and in fact just a single elisp file so I just used &lt;code&gt;fetchFromGithub&lt;&#x2F;code&gt; and symlinked it into my &lt;code&gt;.emacs.d&#x2F;lisp&#x2F;&lt;&#x2F;code&gt; folder and then import it to the lisp config!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;multiple-os-windows-frames-for-one-editor&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#multiple-os-windows-frames-for-one-editor&quot; aria-label=&quot;Anchor link for: multiple-os-windows-frames-for-one-editor&quot;&gt;multiple os windows (frames) for one editor&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;This one is great for me, I have a window manager I love (niri) so I want it to do the work of managing my windows. Since emacs can have mutliple os windows (called frames) I can let it do that. I just made a hotkey to make a new frame and I am set!&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;custom-git-commit-message-editing-mode&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#custom-git-commit-message-editing-mode&quot; aria-label=&quot;Anchor link for: custom-git-commit-message-editing-mode&quot;&gt;custom git commit message editing mode&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I like having some fancy things for my git commit message editing so that I can keep the header to 50 and wrap the body, I could not find anything to do this in emacs (except magit i think can do it, but i just use the cli for everything) so I made my own major mode for it. It warns me when I go over 50 characters in the first line and hard wraps at 76 characters.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;emacs-lisp&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-emacs-lisp &quot;&gt;&lt;code class=&quot;language-emacs-lisp&quot; data-lang=&quot;emacs-lisp&quot;&gt;&lt;span&gt;(define-derived-mode zie-git-commit-mode text-mode &amp;quot;ziegitcommit&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;quot;majour mode for git commit messages&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;  (setq-local fill-column 72)
+&lt;&#x2F;span&gt;&lt;span&gt;  (auto-fill-mode 1)
+&lt;&#x2F;span&gt;&lt;span&gt;  (setq-local comment-start &amp;quot;#&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  (defun zie&#x2F;git-header-warning (limit)
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;highlight header longer than 50 chars&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    (and (&amp;lt;= (line-number-at-pos) 1)
+&lt;&#x2F;span&gt;&lt;span&gt;         (re-search-forward (format &amp;quot;^.\\{%d\\}\\(.*\\)$&amp;quot; (1+ 50)) limit t)))
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  (font-lock-add-keywords
+&lt;&#x2F;span&gt;&lt;span&gt;   nil `((zie&#x2F;git-header-warning 0 font-lock-warning-face prepend)))
+&lt;&#x2F;span&gt;&lt;span&gt;  (let ((map zie-git-commit-mode-map))
+&lt;&#x2F;span&gt;&lt;span&gt;    (define-key map (kbd &amp;quot;C-c C-c&amp;quot;)
+&lt;&#x2F;span&gt;&lt;span&gt;		(lambda ()
+&lt;&#x2F;span&gt;&lt;span&gt;		  (interactive)
+&lt;&#x2F;span&gt;&lt;span&gt;		  (save-buffer)
+&lt;&#x2F;span&gt;&lt;span&gt;		  (kill-buffer)))))
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;(add-to-list &amp;#39;auto-mode-alist
+&lt;&#x2F;span&gt;&lt;span&gt;	     &amp;#39;(&amp;quot;&#x2F;\\.git&#x2F;COMMIT_EDITMSG\\&amp;#39;&amp;quot; . zie-git-commit-mode))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;It is kind of shitty and barely works, In helix I just set 2 rulers but I could not find a nice way to do that in emacs :(. It is something I need to look at further.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;things-i-do-not-like&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#things-i-do-not-like&quot; aria-label=&quot;Anchor link for: things-i-do-not-like&quot;&gt;things i do not like&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;There are some things I do not like that much so far&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;slow&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#slow&quot; aria-label=&quot;Anchor link for: slow&quot;&gt;slow&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;del&gt;Emacs is slow, this is the trade off for it&#x27;s power, but it takes 700 ms to launch the client even when running in the client-server mode. Not much I can do about this :(.&lt;&#x2F;del&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;edit 2025-08-18: This was a misunderstanding of what the dashboard was telling me, it was actually showing that the daemon took 700 ms to launch, launching new frames is significantly faster, though there is still a noticble slowness, for example when opening an org buffer.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;window-and-buffer-management-feels-clunky&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#window-and-buffer-management-feels-clunky&quot; aria-label=&quot;Anchor link for: window-and-buffer-management-feels-clunky&quot;&gt;window and buffer management feels clunky&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;This is mostly because I am not used to it and because the default hotkeys suck a bit, I need to make something to just save and kill the open buffer, and find a nicer way to cleanup my buffer list without &lt;code&gt;C-x k&lt;&#x2F;code&gt; every time.&lt;&#x2F;p&gt;
+&lt;p&gt;Window management was helped greatly by not using windows and only using frames instead, it feels so good, I love it so much.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;need-to-restart-emacs-service-on-many-config-changes&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#need-to-restart-emacs-service-on-many-config-changes&quot; aria-label=&quot;Anchor link for: need-to-restart-emacs-service-on-many-config-changes&quot;&gt;need to restart &lt;code&gt;emacs.service&lt;&#x2F;code&gt; on many config changes&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Sometimes I change something and need to restart the service, minor issue but probably something I can fix, I am thinking a function that evaluates a default config, then evaluates mine to essentially reset the config state.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;direnv-switches-enviroment-every-time-i-switch-buffer&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#direnv-switches-enviroment-every-time-i-switch-buffer&quot; aria-label=&quot;Anchor link for: direnv-switches-enviroment-every-time-i-switch-buffer&quot;&gt;direnv switches enviroment every time i switch buffer&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I use direnv to automatically use my nix dev environments, but when I switch between buffers it switches environment. I would prefer the environment be loaded locally for just that buffer but I do not know if that is possible. I will need to look into it.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#conclusion&quot; aria-label=&quot;Anchor link for: conclusion&quot;&gt;conclusion&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;I will probably keep using emacs for quite a while. It is a very good editor (when you download install and configure a good editor :p) but almost every default value feels very outdated, which is to be expected. I am loving how I can do seemingly everything I have wanted to do in helix but couldn&#x27;t for whatever reason, and I am excited to keep using it.&lt;&#x2F;p&gt;
+&lt;p&gt;If you use emacs and have advice, please let me know somewhere. Especially org-mode related, I am very excited to get more into that!&lt;&#x2F;p&gt;
+&lt;p&gt;My config is available at: &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;skoove&#x2F;dotfiles&#x2F;tree&#x2F;main&#x2F;home-modules&#x2F;emacs&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;skoove&#x2F;dotfiles&#x2F;tree&#x2F;main&#x2F;home-modules&#x2F;emacs&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>just wanting to help</title>
+          <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/just-wanting-to-help/</link>
+          <guid>https://skoove.dev/blog/just-wanting-to-help/</guid>
+          <description xml:base="https://skoove.dev/blog/just-wanting-to-help/">&lt;p&gt;If you interact with the open source community or any community with similar vibes, you have probably either watched the &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=2_Dtmpe9qaQ&quot;&gt;recent video by Louis Rossmann&lt;&#x2F;a&gt;, or seen a lot of images of the old Microsoft mascot clippy. Essentially the point is that people want corporations to make products that are just there to help you, like clippy was just there to help. The idea is to criticise bad and invasive software as a group, but before the &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=SkL9vzW7nY0&quot;&gt;second video&lt;&#x2F;a&gt; came out, which outlines real action people can take against corporations making software that exploits people for profit, I was thinking about the point of the movement at all, but not for the reasons of &quot;changing a profile picture won&#x27;t make any real change&quot;. It was because the core thesis of the video is that corporations used to make things that just wanted to help you, like clippy. Clippy did not spy on you, sell your data, manipulate you into voting a particular way or constantly track every bit of useful information about you, clippy just wanted to help!&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;but-there-are-still-people-that-just-want-to-help&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#but-there-are-still-people-that-just-want-to-help&quot; aria-label=&quot;Anchor link for: but-there-are-still-people-that-just-want-to-help&quot;&gt;but there are still people that just want to help&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;The &quot;&quot;issue&quot;&quot; &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-issue-1&quot;&gt;&lt;a href=&quot;#fn-issue&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; I have with Louis&#x27; presentation is that it does not really highlight the fact that there are people that still want nothing more than to help, and instead seems to say that the only option is to regulate corporations so they make good software again.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;corporations-used-to-care&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#corporations-used-to-care&quot; aria-label=&quot;Anchor link for: corporations-used-to-care&quot;&gt;corporations used to &quot;&quot;care&quot;&quot;&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;It did used to look like the mega corps of today cared for their users and the software they released (this will all focus on software, because I like software), this is because they needed to seem that way. No one willingly using bad software today, they do it either because they have no other option, or because they do not know how bad it is. For a corporation to get to the point where people have no other option than to use their product, they need to get a huge amount of market dominance, embed themselves into the structures of schools, other cooperation&#x27;s, government agencies and the military. The only way to do this? make good software!&lt;&#x2F;p&gt;
+&lt;p&gt;This is very reminiscent of modern day venture capital, but done for slightly different reasons. Most modern startups will make a.. &#x27;good&#x27; product and then get a user base hooked on it, and since we are in the era of fucking-everything-as-a-service this &lt;em&gt;usually&lt;&#x2F;em&gt; involves a monthly subscription. During the first phase, they ** money and they make it up with venture capital funding, all while getting more and more people on the service, and also selling data on the side. When the investors and shareholders inevitably start asking questions about when a profit will be made, the company switches to the second phase. They start sucking as much money in as many ways possible, they raise prices, make new subscription theirs, collect and sell more data, personalise advertisements to make people more angry, add advertisements to an already paid service. And then they die. All the space to embed into existing structures and governments has been taken by the giants like Microsoft and Google, so modern startups just die.&lt;&#x2F;p&gt;
+&lt;p&gt;So it is pretty clear that the cause of terrible software (and all products) that exploit the consumer is the profit motive, and we live under capitalism, that will not change for a while. I just wish there was a dedicated group of people making good software with no profit motive...&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;open-source&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#open-source&quot; aria-label=&quot;Anchor link for: open-source&quot;&gt;open source&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Open source is the answer to bad software, hardware and services. Putting the tools that people use in control of the people that use them is the only real way to keep having good tools. Anything else, and someone will see a chance to make money, and do so.&lt;&#x2F;p&gt;
+&lt;p&gt;In my experience, open source developers generally do it for a few reasons:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;To make software for themselves&lt;&#x2F;li&gt;
+&lt;li&gt;To make software for others&lt;&#x2F;li&gt;
+&lt;li&gt;To make software for fun&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Most probably do it for a combination of all, I know that I do. The important part is that the software is &lt;em&gt;free&lt;&#x2F;em&gt; and not just in price. Free to distribute, free to modify and redistribute and free &lt;em&gt;forever&lt;&#x2F;em&gt;. Not many people make a living, or any money at all from contributing and maintaining open source projects, and most who do make it through optional donations, which they almost certainly would loose if they revoked the open source licence and stopped distributing the source. They are only motivated by making their software good for themselves and for others, they have no reason to spy on users, sell their data, manipulate them or raise the subscription prices, because there are no subscriptions and if they did start spying and selling data, it would be noticed.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;what-people-can-do&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#what-people-can-do&quot; aria-label=&quot;Anchor link for: what-people-can-do&quot;&gt;what people can do&lt;&#x2F;a&gt;&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;start-using-more-open-source&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#start-using-more-open-source&quot; aria-label=&quot;Anchor link for: start-using-more-open-source&quot;&gt;start using more open source!&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+&lt;p&gt;Just using it will make it more popular, talking about it makes it more popular. If someone needs a tool to do something, recommend something open source. The whole clippy thing fits into this in a similar way as was said in the second video, people who know they are on the same page about this stuff can work together to start using it in their organisation. Use of open source software &lt;em&gt;will&lt;&#x2F;em&gt; increase and people will be better for it&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;contribute-to-open-source&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#contribute-to-open-source&quot; aria-label=&quot;Anchor link for: contribute-to-open-source&quot;&gt;contribute to open source&lt;&#x2F;a&gt;&lt;&#x2F;h4&gt;
+&lt;p&gt;Contributing with code is great, but that is not the only way, issues feature requests and documentation are just as important!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;bug reports &amp;amp; feature requests&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;A good bug report or a well outlined feature request takes load off the programmers and helps to focus their labour, and helps improve the software. It is impossible to make software better without identifying the problems and areas of enhancement.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;documentation&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Documentation can be one of the hardest part of maintaining an open source software, it is high effort and hard to get right, but anyone can write documentation. Notice an error in the docs? fix it! is something not mentioned that could be helpful? add it!&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;closing&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#closing&quot; aria-label=&quot;Anchor link for: closing&quot;&gt;closing&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Holding corporations accountable is important, but software written in the interest of endless profit will never be good software, and never be made in the interest of users over profit. This also goes for all products, until the working class has control over the products and tools they use, they will forever be exploited by those who control them. The best thing we can do for software right now is to use open source.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It’s a corporation’s purpose to put profits over people
+Deny, defend, depose, how do you think that that’s not evil?&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cheap Perfume - &lt;em&gt;Woke Mind Virus&lt;&#x2F;em&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-issue&quot;&gt;
+&lt;p&gt;i do not really have an issue but i do not know how else to put it &lt;a href=&quot;#fr-issue-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;section&gt;
+</description>
+      </item>
+      <item>
+          <title>arma 3 on linux</title>
+          <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/arma-3-on-linux/</link>
+          <guid>https://skoove.dev/blog/arma-3-on-linux/</guid>
+          <description xml:base="https://skoove.dev/blog/arma-3-on-linux/">&lt;h1 id=&quot;how-to-get-arma-3-running-on-linux-with-radio-mods&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-to-get-arma-3-running-on-linux-with-radio-mods&quot; aria-label=&quot;Anchor link for: how-to-get-arma-3-running-on-linux-with-radio-mods&quot;&gt;how to get arma 3 running on linux with radio mods&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;Are you only here for that question? Lucky you! This is incredibly simple!&lt;&#x2F;p&gt;
+&lt;p&gt;I use nixos, but this should work everywhere unless you are using something more esoteric than nix.&lt;&#x2F;p&gt;
+&lt;p&gt;First, obviously install and run arma, and also download the teamspeak 3 (64 bit) installer then run arma to the launcher. Now you will need to be subscribed to a mod. Now click on the mod, click the 3 dots, and click &#x27;open in windows explorer&#x27;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;arma-3-on-linux&#x2F;.&#x2F;open-in-explorer.png&quot; alt=&quot;open in explorer&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Now, run the teamspeak 3 launcher and &lt;strong&gt;remember to uncheck the overwolf thing&lt;&#x2F;strong&gt;, I do not know if it actually will break anything, but it probably will and you do not want overwolf anyway. Close teamspeak. Now you should just be able to launch the game, and for ACERE2 at least, it will install the plugin automatically. I am unsure of what will happen if you use something else, but you can just follow it&#x27;s guide for installing the plugin. This is it, transfer your profiles over (in the documents folder for windows, under &lt;code&gt;Arma 3 - Other Profiles&lt;&#x2F;code&gt;) and everything should work.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;note-2025-09-06&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#note-2025-09-06&quot; aria-label=&quot;Anchor link for: note-2025-09-06&quot;&gt;note (2025-09-06)&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Today I was looking at the help options for &lt;code&gt;protontricks&lt;&#x2F;code&gt; and noticed it can set all the env vars for you to just run teamspeak without needint to open explorer every time. You &lt;em&gt;should&lt;&#x2F;em&gt; be able to run the installer by doing &lt;code&gt;protontricks -c &quot;wine installer.exe&quot; $arma3_game_id&lt;&#x2F;code&gt; I also now use this to lauch teamspeak:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;fish&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-fish &quot;&gt;&lt;code class=&quot;language-fish&quot; data-lang=&quot;fish&quot;&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;set arma_game_id &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;107410
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;set teamspeak_path &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;&amp;#39;&#x2F;home&#x2F;zie&#x2F;ssd_games&#x2F;SteamLibrary&#x2F;steamapps&#x2F;compatdata&#x2F;107410&#x2F;pfx&#x2F;drive_c&#x2F;Program Files&#x2F;TeamSpeak 3 Client&#x2F;ts3client_win64.exe&amp;#39;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;protontricks -c &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;wine &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;$teamspeak_path&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;$arma_game_id &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;disown
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;steam steam:&#x2F;&#x2F;rungameid&#x2F;$arma_game_id
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The &lt;code&gt;&#x27;&#x27;&lt;&#x2F;code&gt; inside the &lt;code&gt;&quot;&quot;&lt;&#x2F;code&gt; is needed because there are spaces in the path.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;bonus-performance-things&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#bonus-performance-things&quot; aria-label=&quot;Anchor link for: bonus-performance-things&quot;&gt;bonus performance things&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;In the arma 3 launcher, under parameters, turn on the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Basic
+&lt;ul&gt;
+&lt;li&gt;Show static background in menu: true&lt;&#x2F;li&gt;
+&lt;li&gt;Skip logos at startup: true&lt;&#x2F;li&gt;
+&lt;li&gt;Force window mode: true&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Advanced
+&lt;ul&gt;
+&lt;li&gt;Extra Threads: true
+&lt;ul&gt;
+&lt;li&gt;File operations: true&lt;&#x2F;li&gt;
+&lt;li&gt;Texture loading: true&lt;&#x2F;li&gt;
+&lt;li&gt;Geometry loading: true&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;No logs: true (this is probably really minimal on performance increase, so maybe don&#x27;t bother because you may need the logs)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;bonus-troubleshooting-step&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#bonus-troubleshooting-step&quot; aria-label=&quot;Anchor link for: bonus-troubleshooting-step&quot;&gt;bonus troubleshooting step!!&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;The game may not lock your mouse to the window, if this is the case run protontricks, select arma, select the default wine prefix, and run &lt;code&gt;winecfg&lt;&#x2F;code&gt;. In winecfg enable &quot;automatically capture the mouse in full-screen windows&quot;. This should hopefully fix it for you, it did for me.&lt;&#x2F;p&gt;
+&lt;p&gt;The reason I do not use gamescope, is that this method requires running the launcher, the game, teamspeak and wine explorer. Gamescope simply cannot handle this.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;bonus-extra-resources&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#bonus-extra-resources&quot; aria-label=&quot;Anchor link for: bonus-extra-resources&quot;&gt;bonus extra resources!&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Some people have had setting the game to borderless window fix the mouse exiting the window&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;muttleyxd&#x2F;arma3-unix-launcher&quot;&gt;arma-3-unix-launcher&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;ninelore&#x2F;armaonlinux&#x2F;blob&#x2F;master&#x2F;Arma3Helper.sh&quot;&gt;helper script&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;discord.gg&#x2F;624zAJvbkR&quot;&gt;arma 3 on unix discord&lt;&#x2F;a&gt; thank you everyone here &amp;lt;3&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;arma-3-on-linux&#x2F;.&#x2F;winecfg.png&quot; alt=&quot;winecfg&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;how-to-run-arma-on-linux-part-2-how-not-to-trouble-shoot-an-issue-on-nixos-or-anywhere&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#how-to-run-arma-on-linux-part-2-how-not-to-trouble-shoot-an-issue-on-nixos-or-anywhere&quot; aria-label=&quot;Anchor link for: how-to-run-arma-on-linux-part-2-how-not-to-trouble-shoot-an-issue-on-nixos-or-anywhere&quot;&gt;how to run arma on linux, part 2: how not to trouble shoot an issue on nixos (or anywhere!)&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;p&gt;If you are only here to get arma running, this is not more about how to get arma running, if you have problems please contact me somewhere and I will try my best to help.&lt;&#x2F;p&gt;
+&lt;p&gt;This is not any form of guide beyond lessons learned doing this.&lt;&#x2F;p&gt;
+&lt;p&gt;This saga started during a operation with the unit I am in, &lt;a href=&quot;https:&#x2F;&#x2F;bluemaxima.org&#x2F;&quot;&gt;BlueMaxima&lt;&#x2F;a&gt;, creator of &lt;a href=&quot;https:&#x2F;&#x2F;flashpointarchive.org&#x2F;&quot;&gt;Flashpoint&lt;&#x2F;a&gt;, mentioned that he was having windowing issues. After realising he was on linux I pointed him to gamescope which worked for him as he is using a script and &lt;code&gt;arma-3-unix-launcher&lt;&#x2F;code&gt; to launch the game.&lt;&#x2F;p&gt;
+&lt;p&gt;This made me realise that there are people that have gotten arma working, and play with it, and that me giving up about a year ago was because I was missing something, not because it was impossible. After the mission I ask him how to do it, and he gives me a very detailed step by step, and some resources:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Force Proton 9 in the compatibility menu for Arma 3, install Arma 3, run it once and try to get to the main menu past the launcher (the regular launcher can be iffy on Proton)&lt;&#x2F;li&gt;
+&lt;li&gt;Install arma3-linux-launcher-git (I&#x27;m on an Arch-based distro so it&#x27;s on yay), it does have an App Image as well https:&#x2F;&#x2F;github.com&#x2F;muttleyxd&#x2F;arma3-unix-launcher&#x2F;releases&lt;&#x2F;li&gt;
+&lt;li&gt;Get the Arma 3 Helper script (Arma3Helper.sh) and put it somewhere easy to get to like a folder in your home directory https:&#x2F;&#x2F;github.com&#x2F;ninelore&#x2F;armaonlinux&lt;&#x2F;li&gt;
+&lt;li&gt;Download TeamSpeak 3&#x27;s installer, rename it to TS3.exe, put it in the folder with Arma3Helper.sh&lt;&#x2F;li&gt;
+&lt;li&gt;Open a terminal in Arma3Helper.sh&#x27;s folder and run &quot;.&#x2F;Arma3Helper.sh winetricks Arma&quot; no quotes&lt;&#x2F;li&gt;
+&lt;li&gt;Then run &quot;.&#x2F;Arma3Helper.sh install TS3.exe&quot; no quotes, select Install for All Users but don&#x27;t change any other settings&lt;&#x2F;li&gt;
+&lt;li&gt;Copy all the AAF related mod folders starting with @ symbols into Arma 3&#x27;s directory (you can use the Settings cog in Arma 3&#x27;s game page - Manage - Browse local files, put them all in there)&lt;&#x2F;li&gt;
+&lt;li&gt;Open Arma 3 Unix Launcher (if you&#x27;ve installed it correctly Steam will think you&#x27;re playing Arma 3)&lt;&#x2F;li&gt;
+&lt;li&gt;At the bottom of Arma 3 Unix Launcher, click the Add button in the Custom mods row, add every AAF mod&#x27;s directory by going to its specific directory, you will need to do this a few times for all the mods, if you select the correct folder it should show up in the mod list as a custom mod&lt;&#x2F;li&gt;
+&lt;li&gt;Open one of the HTML presets from the missions channel, it will pop up an error about missing local mods and possibly workshop mods, any missing workshop mods will give you a prompt to subscribe to them, if it does, close Arma 3 Unix Launcher and wait for the workshop mods to update via Steam&lt;&#x2F;li&gt;
+&lt;li&gt;Scroll down and tick all the mods that the launcher complained about by name, they&#x27;ll all be custom mods in the type column, you will need to do this every time you change preset, don&#x27;t rely on saving through the mod manager because the preset ANZIF-side might change&lt;&#x2F;li&gt;
+&lt;li&gt;Launch Arma 3 via the start button&lt;&#x2F;li&gt;
+&lt;li&gt;Run Arma3Helper.sh after Arma is loaded (I&#x27;d recommend making it executable by changing its properties so that you can just double-click it)&lt;&#x2F;li&gt;
+&lt;li&gt;Check your plugins menu in TeamSpeak for ACRE, it should install automatically if you&#x27;ve done it right&lt;&#x2F;li&gt;
+&lt;li&gt;Disable the gamepad plugin, it can cause issues if you have a controller plugged in&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;At this point, running Arma 3 is loading up the Arma 3 Unix Launcher, grabbing the preset and making sure you tick the right mods, starting Arma 3, and when you&#x27;re at Arma 3&#x27;s menu, running Arma3Helper.sh to boot up TeamSpeak&lt;&#x2F;p&gt;
+&lt;p&gt;Known issues:
+Your Windows key will bring up your start menu, you&#x27;ll want to remap your ace interact keys (mapped mine to TAB, just need to get over the muscle memory)
+Multi-monitor setups might suck, you can do something like edit your monitor arrangement to be corner-to-corner, haven&#x27;t figured out how to make gamescope work via the unix launcher&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h2 id=&quot;part-1-of-part-2-do-what-you-are-told&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#part-1-of-part-2-do-what-you-are-told&quot; aria-label=&quot;Anchor link for: part-1-of-part-2-do-what-you-are-told&quot;&gt;part 1 of part 2: do what you are told&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;Instead of simply following the helpful guide, I decide, lets make it slightly different!!! Instead of just downloading the script and running it, I &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;skoove&#x2F;arma3helper-flake&quot;&gt;package it for nix&lt;&#x2F;a&gt; (do not use it, it probably will not work). Instead of using proton 8.0, I try and use proton GE, and on and on. I still mostly followed it and in the end, i did do everything in the guide.. up until installing teamspeak 3 because that never worked. But from the start I should ahve done what I was told to do anyway, because I still would have saved time, if it had of worked for me.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;part-2-of-part-2-read-the-freaking-errors-properly&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#part-2-of-part-2-read-the-freaking-errors-properly&quot; aria-label=&quot;Anchor link for: part-2-of-part-2-read-the-freaking-errors-properly&quot;&gt;part 2 of part 2: read the freaking errors properly&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I saw a common error whenever trying to get anywhere, something something cant find FreeType library. TLDR this did not matter at all, and the only reason I cared is because it said it alot, so I spend a day trying to fix that (I never fix it). While doing this, I ignore the big error below it, &lt;code&gt;&#x2F;lib&#x2F;ld-linux.so.2&lt;&#x2F;code&gt; is missing.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;part-3-of-part-2-know-your-tools&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#part-3-of-part-2-know-your-tools&quot; aria-label=&quot;Anchor link for: part-3-of-part-2-know-your-tools&quot;&gt;part 3 of part 2: know your tools&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;I like to think I am starting to get the hang of nixos. Even if this is true, I am stupid. I try for a day to install random wine packages to get the file, this obviously does not work, as anyone who uses nix would know. I try to copy the file from another package (specificly steam!) into &lt;code&gt;&#x2F;lib&#x2F;&lt;&#x2F;code&gt;. This is extra stupid, by now I seriously should have realised that I was being insanely dumb. Often, when running programs in nix, you need to wrap them in a horrible trap to make them think they are in a normal linux computer and not nixos, I knew this. Steam specificly from what I understand needs a bit of convincing, and I presume this extends to steam things like Proton, what the real solution would be (and was!) is to run proton and the teamspeak installer in the same environment that nix runs steam is.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;part-4-of-part-2-joy&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#part-4-of-part-2-joy&quot; aria-label=&quot;Anchor link for: part-4-of-part-2-joy&quot;&gt;part 4 of part 2: joy&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;p&gt;The solution was exactly what I said in the install guide, run the installer from a running instance of the prefix. I am fairly sure I can actually get those scripts to work if I wrap them correctly, but I cannot be bothered, maybe someday I will be bored and do it, but not currently.&lt;&#x2F;p&gt;
+&lt;p&gt;Even though I wasted alot of time, seeing everything just work after it all clicked for me felt great, and reminded me of why I put myself through this, I learn more every time, and I get to maybe help at least one person in the future.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>nix functions</title>
+          <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/nix-functions/</link>
+          <guid>https://skoove.dev/blog/nix-functions/</guid>
+          <description xml:base="https://skoove.dev/blog/nix-functions/">&lt;h1 id=&quot;the-basics&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#the-basics&quot; aria-label=&quot;Anchor link for: the-basics&quot;&gt;the basics&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;f &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;arg&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;arg &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;f &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;5 &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# evaluates to 6
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Basic function syntax is simple, we provide one argument and get one output, and a function can only have one input and output. But what if we wanted multiple armament?&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;multiple-arguments&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#multiple-arguments&quot; aria-label=&quot;Anchor link for: multiple-arguments&quot;&gt;multiple arguments&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;1 3 &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# evaluates to 4
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here &lt;code&gt;add&lt;&#x2F;code&gt; can take in 2 numbers &lt;code&gt;num_1&lt;&#x2F;code&gt; and &lt;code&gt;num_2&lt;&#x2F;code&gt; and return the result of adding both. But wait, didn&#x27;t I just say that a function can only have one input and output? Yes, but this function is two separate functions. The first function is &lt;code&gt;add&lt;&#x2F;code&gt; this function takes &lt;code&gt;num_1&lt;&#x2F;code&gt; and returns a function that takes &lt;code&gt;num_2&lt;&#x2F;code&gt; as an input&lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-currying_wiki-1&quot;&gt;&lt;a href=&quot;#fn-currying_wiki&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. We can follow this by going through the function step by step.&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;add 1 3&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;(num_1: num_2: num_1 + num_2) 1 3&lt;&#x2F;code&gt; &lt;sup class=&quot;footnote-reference&quot; id=&quot;fr-anon_functions-1&quot;&gt;&lt;a href=&quot;#fn-anon_functions&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;(num_2: 1 + num_2) 3&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;1 + 3&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;An alternative way of creating functions is attribute sets. In reality, we are actually only passing a single argument in — the attribute set.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;+ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;num_2&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;add &lt;&#x2F;span&gt;&lt;span&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;num_1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;num_2 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;6&lt;&#x2F;span&gt;&lt;span&gt;; } &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#928374;&quot;&gt;# evaluates to 7
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;An attribute set is just a set of keys and values. To say that we want our function to take in an attribute set, we provide a comma-separated list of the keys we should have enclosed &lt;code&gt;{}&lt;&#x2F;code&gt;, &lt;code&gt;{ num_1 , num_2 }:&lt;&#x2F;code&gt; followed by the function itself &lt;code&gt;num_1 + num_2&lt;&#x2F;code&gt;. To call the function we need to construct an attribute set, done by providing the keys and values separated by &lt;code&gt;;&lt;&#x2F;code&gt; and enclosed with &lt;code&gt;{}&lt;&#x2F;code&gt;. This is a more simple, but more verbose way of providing arguments, but is often the better choice for clarity when you have several arguments (in my opinion).&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;example&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#example&quot; aria-label=&quot;Anchor link for: example&quot;&gt;example&lt;&#x2F;a&gt;&lt;&#x2F;h1&gt;
+&lt;pre data-lang=&quot;nix&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-nix &quot;&gt;&lt;code class=&quot;language-nix&quot; data-lang=&quot;nix&quot;&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;... &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;services&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;caddy &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;enable &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;true&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;virtualHosts &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;let
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;mkReverseProxy &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;domain&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;ip&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;: {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#fdf4c1aa;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;domain&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#fdf4c1aa;&quot;&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;          &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;extraConfig &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;#39;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;            tls internal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;            reverse_proxy &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#b8bb26;&quot;&gt;${&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;ip&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#b8bb26;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt; {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;              transport http {
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;                tls
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;                tls_insecure_skip_verify
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;              }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;            }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;          &amp;#39;&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        };
+&lt;&#x2F;span&gt;&lt;span&gt;      };
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;proxies &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span&gt;[
+&lt;&#x2F;span&gt;&lt;span&gt;        { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;domain &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;proxmox-1.home.com&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;ip &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;192.168.0.230:8006&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;span&gt;        { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;domain &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;proxmox-2.home.com&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;ip &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;192.168.0.231:8006&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;span&gt;        { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;domain &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;jellyfin.home.com&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;ip &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b8bb26;&quot;&gt;&amp;quot;localhost:8096&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;; }
+&lt;&#x2F;span&gt;&lt;span&gt;      ];
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;in
+&lt;&#x2F;span&gt;&lt;span&gt;      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d3869b;&quot;&gt;builtins&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;foldl&amp;#39; &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;acc&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;val&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;acc &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fe8019;&quot;&gt;&#x2F;&#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;mkReverseProxy val&lt;&#x2F;span&gt;&lt;span&gt;) {} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;proxies&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;  };
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Here, we have a few things, we define a function &lt;code&gt;mkReverseProxy&lt;&#x2F;code&gt; which takes in an attribute with keys &lt;code&gt;domain&lt;&#x2F;code&gt; and &lt;code&gt;ip&lt;&#x2F;code&gt; which simply does some string interpolation to generate the &lt;a href=&quot;https:&#x2F;&#x2F;caddyserver.com&#x2F;&quot;&gt;caddy&lt;&#x2F;a&gt; configuration for reverse proxies. In the &lt;code&gt;proxies&lt;&#x2F;code&gt; array we create a few of the function inputs then use &lt;code&gt;builtins.foldl&#x27;&lt;&#x2F;code&gt;. Let&#x27;s look closer at the &lt;code&gt;foldl&#x27;&lt;&#x2F;code&gt; call. &lt;code&gt;foldl&#x27;&lt;&#x2F;code&gt; takes in 3 arguments: a function to apply to each member of the list, &lt;code&gt;(acc: val: acc &#x2F;&#x2F; mkReverseProxy val)&lt;&#x2F;code&gt; a starting state of the new value &lt;code&gt;{}&lt;&#x2F;code&gt; and the list itself &lt;code&gt;proxies&lt;&#x2F;code&gt;. The function we apply to the list simply appends the result of running &lt;code&gt;mkReverseProxy&lt;&#x2F;code&gt; on the value from &lt;code&gt;proxies&lt;&#x2F;code&gt; to the end of our accumulator (the attribute set with the starting state &lt;code&gt;{}&lt;&#x2F;code&gt;) using the &lt;code&gt;&#x2F;&#x2F;&lt;&#x2F;code&gt; syntax for joining attribute sets.&lt;&#x2F;p&gt;
+&lt;p&gt;Hey... that syntax at the top that&#x27;s in every single one of your configuration files for NixOS looks suspiciously like a function definition...&lt;&#x2F;p&gt;
+&lt;p&gt;Thank you &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;user&#x2F;ecco256&#x2F;&quot;&gt;u&#x2F;ecco256&lt;&#x2F;a&gt; and &lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;user&#x2F;C0V3RT_KN1GHT&#x2F;&quot;&gt;u&#x2F;C0V3RT_KN1GHT&lt;&#x2F;a&gt; for helping improve this!&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;section class=&quot;footnotes&quot;&gt;
+&lt;ol class=&quot;footnotes-list&quot;&gt;
+&lt;li id=&quot;fn-currying_wiki&quot;&gt;
+&lt;p&gt;This is called currying. For more information see the Wikipedia article &lt;a href=&quot;https:&#x2F;&#x2F;wikipedia.org&#x2F;wiki&#x2F;Currying&quot;&gt;wikipedia.org&#x2F;wiki&#x2F;Currying&lt;&#x2F;a&gt; &lt;a href=&quot;#fr-currying_wiki-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li id=&quot;fn-anon_functions&quot;&gt;
+&lt;p&gt;You can write any function in parentheses like this, these are called anonymous functions, just meaning any function with no label. You only need to assign a function a name with the &lt;code&gt;let in&lt;&#x2F;code&gt; syntax if it needs it, otherwise you can just omit the name completely, for example if you were using the function as an input to another function. &lt;a href=&quot;#fr-anon_functions-1&quot;&gt;↩&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;section&gt;
+</description>
+      </item>
+      <item>
+          <title>undersea devlog #1</title>
+          <pubDate>Wed, 16 Apr 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/undersea-devlog-1/</link>
+          <guid>https://skoove.dev/blog/undersea-devlog-1/</guid>
+          <description xml:base="https://skoove.dev/blog/undersea-devlog-1/">&lt;p&gt;It has been two days since I started working on undersea, and its going well!&lt;&#x2F;p&gt;
+&lt;p&gt;I have implemented the basics of the library, you can now add shows, retrive data about your shows and their episodes! I have started doing some basic work on learning ratatui to create the tui, which will now be developed along side the library. This allows me the focus in the scope of the library as I add the features that the tui provides.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;things-missing-from-library-that-i-can-think-of&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#things-missing-from-library-that-i-can-think-of&quot; aria-label=&quot;Anchor link for: things-missing-from-library-that-i-can-think-of&quot;&gt;things missing from library (that i can think of)&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Retriving episode duration.
+&lt;ul&gt;
+&lt;li&gt;This is quite hard! it is what most of the devlopment time was actually spent on for the past two days. It is shockingly difficult to get the duration of an episode, as you need to decode the mp3 file up until the point where things like images stop to get a frame to get the bitrate, and that is upwards of 3mb. For the hundreds and likely thousands of episodes in all podcasts someone would have added, that is multiple gigabytes of data transfer just to get the durations. I plan to work around this by having duration calculation just be something that app implementations call, probably when you attempt to play an episode, or if there is a resume duration stored, but no total duration.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Saving to file
+&lt;ul&gt;
+&lt;li&gt;This is a core feature, but not one I think is difficult, I will probably regret this&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Removing podcasts&lt;&#x2F;li&gt;
+&lt;li&gt;Sorting podcasts
+&lt;ul&gt;
+&lt;li&gt;Sorting will be done by sorting the vector that episodes are stored in. The vector will be ordered oldest first, and then app implementations can have a button that swaps the display order&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Marking episodes as finished&lt;&#x2F;li&gt;
+&lt;li&gt;Setting resume duration of episodes&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;things-missing-from-tui&quot;&gt;&lt;a class=&quot;zola-anchor&quot; href=&quot;#things-missing-from-tui&quot; aria-label=&quot;Anchor link for: things-missing-from-tui&quot;&gt;things missing from tui&lt;&#x2F;a&gt;&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;everything&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</description>
+      </item>
+      <item>
+          <title>i am making a new podcast program</title>
+          <pubDate>Sun, 13 Apr 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/i-am-making-a-new-podcast-program/</link>
+          <guid>https://skoove.dev/blog/i-am-making-a-new-podcast-program/</guid>
+          <description xml:base="https://skoove.dev/blog/i-am-making-a-new-podcast-program/">&lt;p&gt;If you want to listen to podcasts, you have a few options: Spotify, YouTube, Apple Podcasts, or RSS. RSS is great, but it lacks the quality of life features that these other providers have. For me the biggest two things that are missing are ordering episodes in order of oldest to newest (I listen to alot of fiction podcasts) and being able to resume a podcast &lt;em&gt;across devices&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;I am hoping to resolve this by making my own program that has everything &lt;em&gt;I&lt;&#x2F;em&gt; personally want, and maybe what alot of other people are missing. I  want it to be super easy to make a new app for any platform, and to store all of its data in easy to parse files, so its not too hard to move to a different platform if it does not work for you.&lt;&#x2F;p&gt;
+&lt;p&gt;The basic idea is to store two things, Your list of subscribed podcasts, weather you have watched or not watched an episode, and the point where you left an episode off.&lt;&#x2F;p&gt;
+&lt;p&gt;This is to just give you a better idea of what I mean, this will change.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#282828;color:#fdf4c1aa;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;Feed &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;url&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;episodes&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fabd2f;&quot;&gt;Vec&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;Episode&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;derive&lt;&#x2F;span&gt;&lt;span&gt;(Debug)]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#fa5c4b;&quot;&gt;pub struct &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8ec07c;&quot;&gt;Episode &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;url&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;media_url&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;: String,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;date&lt;&#x2F;span&gt;&lt;span&gt;: DateTime&amp;lt;Utc&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;duration&lt;&#x2F;span&gt;&lt;span&gt;: time::Duration,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#fdf4c1;&quot;&gt;resume_time&lt;&#x2F;span&gt;&lt;span&gt;: time::Duration,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Initially, I will make a tui application, and an andriod app after that, maybe later I can make a gui and ios app, but thats only if I can make those first two into a useable program.&lt;&#x2F;p&gt;
+&lt;p&gt;If you are intrested, take a at the repo on &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;skoove&#x2F;undersea&quot;&gt;github&lt;&#x2F;a&gt;, and considor contributing or giving it a star.&lt;&#x2F;p&gt;
+</description>
+      </item>
+      <item>
+          <title>how i made the psx style doughnut</title>
+          <pubDate>Fri, 31 Jan 2025 00:00:00 +0000</pubDate>
+          <author>Unknown</author>
+          <link>https://skoove.dev/blog/how-i-made-the-psx-style-doughnut/</link>
+          <guid>https://skoove.dev/blog/how-i-made-the-psx-style-doughnut/</guid>
+          <description xml:base="https://skoove.dev/blog/how-i-made-the-psx-style-doughnut/">&lt;video autoplay loop style=&quot;width: 100%&quot;&gt;  
+  &lt;source src=&quot;.&#x2F;doughnut.mp4&quot; type=&quot;video&#x2F;mp4&quot;&gt;  
+&lt;&#x2F;video&gt;
+&lt;p&gt;I want to clarify that when I say &quot;ps1&#x2F;psx style&quot; I mean style, I am not going for a exact replica of the way those platforms looked, because that does not interest me, but I think that taking elements of that such as vertex wobble, and things that are not actually from those platforms, like colour compression and dithering and combining them with modern rendering techniques like reflection bloom and raytracing can have a very pretty result, and its something I want to experiment with much more in the future.&lt;&#x2F;p&gt;
+&lt;p&gt;I first got the idea to pursue this style from &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=2a_VtQJHkb8&quot;&gt;this video&lt;&#x2F;a&gt; by &lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;@RetroPlus&quot;&gt;Retro Plus&lt;&#x2F;a&gt;. This video shows their workflow with shoebox texture ripper and a &lt;a href=&quot;https:&#x2F;&#x2F;lucasroedel.gumroad.com&#x2F;l&#x2F;psx_snapping&quot;&gt;PSX vertex snapping addon by Lucas Roedel&lt;&#x2F;a&gt;. I took those two for this project, but the PSX vertex snapping addon had some issues that just would not work for my workflow so will not be used by me for most things in future.&lt;&#x2F;p&gt;
+&lt;p&gt;The addon can get a very very authentic effect, but it comes at a cost. The addon works with a 3d grid which it snaps all the vertices too, and you can choose how large the grid is. I did not think about this very hard, and definitely did not consider that the amount of vertices would be $n^3$ when I selected 400. $400^3$ is 64 000 000, which took up 12 gigabytes of memory and was very slow.&lt;&#x2F;p&gt;
+&lt;p&gt;I did not actually need a grid that large, 50 would have been plenty, but its still a lot more overhead than I was willing to have for an effect like that. I fumbled in geometry nodes for a while trying to round all the vertex positions to a set point but could not get that to work, and that would also not make the vertices to move when the object did not move, and that is realistic, but not what I want.&lt;&#x2F;p&gt;
+&lt;p&gt;I gave up for a bit until I received this reddit comment:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&quot;For performance sake, did you consider a displacement modifier with a noise texture attached to a constantly-rotating object? It wouldn&#x27;t be quite as accurate, but it would perform about 200% better.&quot;
+- &lt;em&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.reddit.com&#x2F;user&#x2F;Independent_Sea_6317&#x2F;&quot;&gt;RatKingbutwithHumanChildren&lt;&#x2F;a&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;So I now use that method, a noise texture on the object with an empty constantly moving.&lt;&#x2F;p&gt;
+&lt;p&gt;For the textures, as mentioned earlier I used &lt;a href=&quot;https:&#x2F;&#x2F;renderhjs.net&#x2F;shoebox&#x2F;&quot;&gt;shoebox texture ripper&lt;&#x2F;a&gt; and got this texture that I just painted a little to remove some harsh transitions.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;how-i-made-the-psx-style-doughnut&#x2F;.&#x2F;doughnut%20sprite.png&quot; alt=&quot;doughnut texture&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;I also made a little shader for the doughnut to give the icing a little reflection&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;how-i-made-the-psx-style-doughnut&#x2F;.&#x2F;doughnut%20shader.png&quot; alt=&quot;the dougnuts shader&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;That is pretty much it! It was a lot of fun to make and I learnt a lot about the eevee renderer and how powerful it is so I think I will try and use it for future photorealistic-ish things!&lt;&#x2F;p&gt;
+</description>
+      </item>
+    </channel>
+</rss>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/style.css">
+  
+  <title>skoove.dev - arma 3 on linux</title>
+  
+
+  
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://skoove.dev/rss.xml">
+  
+</head>
+
+<body>
+  <header>
+    <a href="/">
+      <h1 class="site_name">skoove.dev</h1>
+    </a>
+
+    <nav>
+      
+      <li><a href="&#x2F;blog">
+          <h1 class="nav_button">blog</h1>
+        </a></li>
+      
+      <li><a href="&#x2F;about">
+          <h1 class="nav_button">about</h1>
+        </a></li>
+      
+      <li><a href="&#x2F;now">
+          <h1 class="nav_button">now</h1>
+        </a></li>
+      
+    </nav>
+  </header>
+  <hr>
+
+  <section class="section">
+    <div class="container">
+      
+<h1 class="title">
+  arma 3 on linux
+</h1>
+<nav class="page-nav">
+  
+  <a class="next-page" href="https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;nix-functions&#x2F;">&lt nix functions</a>
+  
+  
+  <a class="previous-page" href="https:&#x2F;&#x2F;skoove.dev&#x2F;blog&#x2F;just-wanting-to-help&#x2F;">just wanting to help &gt </a>
+  
+</nav>
+<p class="subtitle"><strong>2025-07-27</strong></p>
+<h1 id="how-to-get-arma-3-running-on-linux-with-radio-mods"><a class="zola-anchor" href="#how-to-get-arma-3-running-on-linux-with-radio-mods" aria-label="Anchor link for: how-to-get-arma-3-running-on-linux-with-radio-mods">how to get arma 3 running on linux with radio mods</a></h1>
+<p>Are you only here for that question? Lucky you! This is incredibly simple!</p>
+<p>I use nixos, but this should work everywhere unless you are using something more esoteric than nix.</p>
+<p>First, obviously install and run arma, and also download the teamspeak 3 (64 bit) installer then run arma to the launcher. Now you will need to be subscribed to a mod. Now click on the mod, click the 3 dots, and click 'open in windows explorer'.</p>
+<p><img src="https://skoove.dev/blog/arma-3-on-linux/./open-in-explorer.png" alt="open in explorer" /></p>
+<p>Now, run the teamspeak 3 launcher and <strong>remember to uncheck the overwolf thing</strong>, I do not know if it actually will break anything, but it probably will and you do not want overwolf anyway. Close teamspeak. Now you should just be able to launch the game, and for ACERE2 at least, it will install the plugin automatically. I am unsure of what will happen if you use something else, but you can just follow it's guide for installing the plugin. This is it, transfer your profiles over (in the documents folder for windows, under <code>Arma 3 - Other Profiles</code>) and everything should work.</p>
+<h2 id="note-2025-09-06"><a class="zola-anchor" href="#note-2025-09-06" aria-label="Anchor link for: note-2025-09-06">note (2025-09-06)</a></h2>
+<p>Today I was looking at the help options for <code>protontricks</code> and noticed it can set all the env vars for you to just run teamspeak without needint to open explorer every time. You <em>should</em> be able to run the installer by doing <code>protontricks -c "wine installer.exe" $arma3_game_id</code> I also now use this to lauch teamspeak:</p>
+<pre data-lang="fish" style="background-color:#282828;color:#fdf4c1aa;" class="language-fish "><code class="language-fish" data-lang="fish"><span style="color:#fdf4c1;">set arma_game_id </span><span style="color:#d3869b;">107410
+</span><span style="color:#fdf4c1;">set teamspeak_path </span><span style="color:#b8bb26;">&quot;&#39;/home/zie/ssd_games/SteamLibrary/steamapps/compatdata/107410/pfx/drive_c/Program Files/TeamSpeak 3 Client/ts3client_win64.exe&#39;&quot;
+</span><span>
+</span><span style="color:#fdf4c1;">protontricks -c </span><span style="color:#b8bb26;">&quot;wine </span><span style="color:#fdf4c1;">$teamspeak_path</span><span style="color:#b8bb26;">&quot; </span><span style="color:#fdf4c1;">$arma_game_id </span><span style="color:#fe8019;">&amp; </span><span style="color:#fdf4c1;">disown
+</span><span style="color:#fdf4c1;">steam steam://rungameid/$arma_game_id
+</span></code></pre>
+<p>The <code>''</code> inside the <code>""</code> is needed because there are spaces in the path.</p>
+<h2 id="bonus-performance-things"><a class="zola-anchor" href="#bonus-performance-things" aria-label="Anchor link for: bonus-performance-things">bonus performance things</a></h2>
+<p>In the arma 3 launcher, under parameters, turn on the following:</p>
+<ul>
+<li>Basic
+<ul>
+<li>Show static background in menu: true</li>
+<li>Skip logos at startup: true</li>
+<li>Force window mode: true</li>
+</ul>
+</li>
+<li>Advanced
+<ul>
+<li>Extra Threads: true
+<ul>
+<li>File operations: true</li>
+<li>Texture loading: true</li>
+<li>Geometry loading: true</li>
+</ul>
+</li>
+<li>No logs: true (this is probably really minimal on performance increase, so maybe don't bother because you may need the logs)</li>
+</ul>
+</li>
+</ul>
+<h2 id="bonus-troubleshooting-step"><a class="zola-anchor" href="#bonus-troubleshooting-step" aria-label="Anchor link for: bonus-troubleshooting-step">bonus troubleshooting step!!</a></h2>
+<p>The game may not lock your mouse to the window, if this is the case run protontricks, select arma, select the default wine prefix, and run <code>winecfg</code>. In winecfg enable "automatically capture the mouse in full-screen windows". This should hopefully fix it for you, it did for me.</p>
+<p>The reason I do not use gamescope, is that this method requires running the launcher, the game, teamspeak and wine explorer. Gamescope simply cannot handle this.</p>
+<h2 id="bonus-extra-resources"><a class="zola-anchor" href="#bonus-extra-resources" aria-label="Anchor link for: bonus-extra-resources">bonus extra resources!</a></h2>
+<ul>
+<li>Some people have had setting the game to borderless window fix the mouse exiting the window</li>
+<li><a href="https://github.com/muttleyxd/arma3-unix-launcher">arma-3-unix-launcher</a></li>
+<li><a href="https://github.com/ninelore/armaonlinux/blob/master/Arma3Helper.sh">helper script</a></li>
+<li><a href="https://discord.gg/624zAJvbkR">arma 3 on unix discord</a> thank you everyone here &lt;3</li>
+</ul>
+<p><img src="https://skoove.dev/blog/arma-3-on-linux/./winecfg.png" alt="winecfg" /></p>
+<h1 id="how-to-run-arma-on-linux-part-2-how-not-to-trouble-shoot-an-issue-on-nixos-or-anywhere"><a class="zola-anchor" href="#how-to-run-arma-on-linux-part-2-how-not-to-trouble-shoot-an-issue-on-nixos-or-anywhere" aria-label="Anchor link for: how-to-run-arma-on-linux-part-2-how-not-to-trouble-shoot-an-issue-on-nixos-or-anywhere">how to run arma on linux, part 2: how not to trouble shoot an issue on nixos (or anywhere!)</a></h1>
+<p>If you are only here to get arma running, this is not more about how to get arma running, if you have problems please contact me somewhere and I will try my best to help.</p>
+<p>This is not any form of guide beyond lessons learned doing this.</p>
+<p>This saga started during a operation with the unit I am in, <a href="https://bluemaxima.org/">BlueMaxima</a>, creator of <a href="https://flashpointarchive.org/">Flashpoint</a>, mentioned that he was having windowing issues. After realising he was on linux I pointed him to gamescope which worked for him as he is using a script and <code>arma-3-unix-launcher</code> to launch the game.</p>
+<p>This made me realise that there are people that have gotten arma working, and play with it, and that me giving up about a year ago was because I was missing something, not because it was impossible. After the mission I ask him how to do it, and he gives me a very detailed step by step, and some resources:</p>
+<blockquote>
+<ul>
+<li>Force Proton 9 in the compatibility menu for Arma 3, install Arma 3, run it once and try to get to the main menu past the launcher (the regular launcher can be iffy on Proton)</li>
+<li>Install arma3-linux-launcher-git (I'm on an Arch-based distro so it's on yay), it does have an App Image as well https://github.com/muttleyxd/arma3-unix-launcher/releases</li>
+<li>Get the Arma 3 Helper script (Arma3Helper.sh) and put it somewhere easy to get to like a folder in your home directory https://github.com/ninelore/armaonlinux</li>
+<li>Download TeamSpeak 3's installer, rename it to TS3.exe, put it in the folder with Arma3Helper.sh</li>
+<li>Open a terminal in Arma3Helper.sh's folder and run "./Arma3Helper.sh winetricks Arma" no quotes</li>
+<li>Then run "./Arma3Helper.sh install TS3.exe" no quotes, select Install for All Users but don't change any other settings</li>
+<li>Copy all the AAF related mod folders starting with @ symbols into Arma 3's directory (you can use the Settings cog in Arma 3's game page - Manage - Browse local files, put them all in there)</li>
+<li>Open Arma 3 Unix Launcher (if you've installed it correctly Steam will think you're playing Arma 3)</li>
+<li>At the bottom of Arma 3 Unix Launcher, click the Add button in the Custom mods row, add every AAF mod's directory by going to its specific directory, you will need to do this a few times for all the mods, if you select the correct folder it should show up in the mod list as a custom mod</li>
+<li>Open one of the HTML presets from the missions channel, it will pop up an error about missing local mods and possibly workshop mods, any missing workshop mods will give you a prompt to subscribe to them, if it does, close Arma 3 Unix Launcher and wait for the workshop mods to update via Steam</li>
+<li>Scroll down and tick all the mods that the launcher complained about by name, they'll all be custom mods in the type column, you will need to do this every time you change preset, don't rely on saving through the mod manager because the preset ANZIF-side might change</li>
+<li>Launch Arma 3 via the start button</li>
+<li>Run Arma3Helper.sh after Arma is loaded (I'd recommend making it executable by changing its properties so that you can just double-click it)</li>
+<li>Check your plugins menu in TeamSpeak for ACRE, it should install automatically if you've done it right</li>
+<li>Disable the gamepad plugin, it can cause issues if you have a controller plugged in</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>At this point, running Arma 3 is loading up the Arma 3 Unix Launcher, grabbing the preset and making sure you tick the right mods, starting Arma 3, and when you're at Arma 3's menu, running Arma3Helper.sh to boot up TeamSpeak</p>
+<p>Known issues:
+Your Windows key will bring up your start menu, you'll want to remap your ace interact keys (mapped mine to TAB, just need to get over the muscle memory)
+Multi-monitor setups might suck, you can do something like edit your monitor arrangement to be corner-to-corner, haven't figured out how to make gamescope work via the unix launcher</p>
+</blockquote>
+<h2 id="part-1-of-part-2-do-what-you-are-told"><a class="zola-anchor" href="#part-1-of-part-2-do-what-you-are-told" aria-label="Anchor link for: part-1-of-part-2-do-what-you-are-told">part 1 of part 2: do what you are told</a></h2>
+<p>Instead of simply following the helpful guide, I decide, lets make it slightly different!!! Instead of just downloading the script and running it, I <a href="https://github.com/skoove/arma3helper-flake">package it for nix</a> (do not use it, it probably will not work). Instead of using proton 8.0, I try and use proton GE, and on and on. I still mostly followed it and in the end, i did do everything in the guide.. up until installing teamspeak 3 because that never worked. But from the start I should ahve done what I was told to do anyway, because I still would have saved time, if it had of worked for me.</p>
+<h2 id="part-2-of-part-2-read-the-freaking-errors-properly"><a class="zola-anchor" href="#part-2-of-part-2-read-the-freaking-errors-properly" aria-label="Anchor link for: part-2-of-part-2-read-the-freaking-errors-properly">part 2 of part 2: read the freaking errors properly</a></h2>
+<p>I saw a common error whenever trying to get anywhere, something something cant find FreeType library. TLDR this did not matter at all, and the only reason I cared is because it said it alot, so I spend a day trying to fix that (I never fix it). While doing this, I ignore the big error below it, <code>/lib/ld-linux.so.2</code> is missing.</p>
+<h2 id="part-3-of-part-2-know-your-tools"><a class="zola-anchor" href="#part-3-of-part-2-know-your-tools" aria-label="Anchor link for: part-3-of-part-2-know-your-tools">part 3 of part 2: know your tools</a></h2>
+<p>I like to think I am starting to get the hang of nixos. Even if this is true, I am stupid. I try for a day to install random wine packages to get the file, this obviously does not work, as anyone who uses nix would know. I try to copy the file from another package (specificly steam!) into <code>/lib/</code>. This is extra stupid, by now I seriously should have realised that I was being insanely dumb. Often, when running programs in nix, you need to wrap them in a horrible trap to make them think they are in a normal linux computer and not nixos, I knew this. Steam specificly from what I understand needs a bit of convincing, and I presume this extends to steam things like Proton, what the real solution would be (and was!) is to run proton and the teamspeak installer in the same environment that nix runs steam is.</p>
+<h2 id="part-4-of-part-2-joy"><a class="zola-anchor" href="#part-4-of-part-2-joy" aria-label="Anchor link for: part-4-of-part-2-joy">part 4 of part 2: joy</a></h2>
+<p>The solution was exactly what I said in the install guide, run the installer from a running instance of the prefix. I am fairly sure I can actually get those scripts to work if I wrap them correctly, but I cannot be bothered, maybe someday I will be bored and do it, but not currently.</p>
+<p>Even though I wasted alot of time, seeing everything just work after it all clicked for me felt great, and reminded me of why I put myself through this, I learn more every time, and I get to maybe help at least one person in the future.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
