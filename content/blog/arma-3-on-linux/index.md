@@ -14,6 +14,19 @@ First, obviously install and run arma, and also download the teamspeak 3 (64 bit
 
 Now, run the teamspeak 3 launcher and **remember to uncheck the overwolf thing**, I do not know if it actually will break anything, but it probably will and you do not want overwolf anyway. Close teamspeak. Now you should just be able to launch the game, and for ACERE2 at least, it will install the plugin automatically. I am unsure of what will happen if you use something else, but you can just follow it's guide for installing the plugin. This is it, transfer your profiles over (in the documents folder for windows, under `Arma 3 - Other Profiles`) and everything should work.
 
+## note (2025-09-06)
+Today I was looking at the help options for `protontricks` and noticed it can set all the env vars for you to just run teamspeak without needint to open explorer every time. You *should* be able to run the installer by doing `protontricks -c "wine installer.exe" $arma3_game_id` I also now use this to lauch teamspeak:
+
+```fish
+set arma_game_id 107410
+set teamspeak_path "'/home/zie/ssd_games/SteamLibrary/steamapps/compatdata/107410/pfx/drive_c/Program Files/TeamSpeak 3 Client/ts3client_win64.exe'"
+
+protontricks -c "wine $teamspeak_path" $arma_game_id & disown
+steam steam://rungameid/$arma_game_id
+```
+
+The `''` inside the `""` is needed because there are spaces in the path.
+
 ## bonus performance things
 In the arma 3 launcher, under parameters, turn on the following:
 - Basic
